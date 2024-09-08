@@ -127,7 +127,7 @@ const CreatePost = () => {
                       label="Category"
                       selected={selectedCategory}
                       setSelected={setSelectedCategory}
-                      data={categories?.response}
+                      data={categories}
                       withImage={false}
                       placeholder="Select a category"
                     />
@@ -137,7 +137,7 @@ const CreatePost = () => {
                       label="Author"
                       selected={selectedAuthor}
                       setSelected={setSelectedAuthor}
-                      data={authors?.response}
+                      data={authors}
                       withImage={false}
                       placeholder="Select an author"
                     />

@@ -40,9 +40,9 @@ const addNewPost = createAsyncThunk(
         //     message: "Post created successfully",
         //   })
         // );
+        dispatch(fetchPosts("posts/pull?del_flag=0"));
       }
       console.log("Post create response", response);
-      dispatch(fetchPosts());
     } catch (error) {
       const errorMessage = error;
       console.log(errorMessage);

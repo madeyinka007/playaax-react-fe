@@ -229,7 +229,7 @@ const Posts = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {posts?.response?.map((item, rowIndex) => {
+                      {posts?.map((item, rowIndex) => {
                         return (
                           <tr
                             key={rowIndex}

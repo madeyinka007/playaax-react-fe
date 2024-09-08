@@ -26,10 +26,10 @@ const addNewAuthor = createAsyncThunk(
     try {
       const response = await postData("posts/author/add", AuthorData);
 
-      if (response?.message === "Success!") {
+      if (response?.status === 201) {
         toast.success("Author created successfully!");
 
-        // dispatch(fetchAuthors("posts/Author/pull?del_flag=0"));
+        dispatch(fetchAuthors("posts/author/pull?del_flag=0"));
       }
       console.log("Author create response", response);
     } catch (error) {

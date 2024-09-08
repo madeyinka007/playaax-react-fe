@@ -223,7 +223,7 @@ const Authors = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {authors?.response?.map((item, rowIndex) => {
+                      {authors?.map((item, rowIndex) => {
                         return (
                           <tr
                             key={rowIndex}

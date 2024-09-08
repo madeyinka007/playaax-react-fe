@@ -29,7 +29,10 @@ const authorSlice = createSlice({
       })
       .addCase(fetchAuthors.fulfilled, (state, action) => {
         state.loading = false;
-        state.authors = action.payload;
+        // state.authors = action.payload;
+        state.authors = Array.isArray(action.payload.response)
+          ? action.payload.response
+          : [];
       })
 
       .addCase(fetchAuthors.rejected, (state, action) => {
@@ -44,7 +47,8 @@ const authorSlice = createSlice({
       })
       .addCase(addNewAuthor.fulfilled, (state, action) => {
         state.loading = false;
-        state.authors = [...state.authors, action.payload];
+        //   state.authors = [...state.authors, action.payload];
+        state.authors = [...state.authors, { ...action.payload }];
       })
       .addCase(addNewAuthor.rejected, (state, action) => {
         state.loading = false;

@@ -29,7 +29,10 @@ const postsSlice = createSlice({
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.loading = false;
-        state.posts = action.payload;
+        // state.posts = action.payload;
+        state.posts = Array.isArray(action.payload.response)
+          ? action.payload.response
+          : [];
       })
 
       .addCase(fetchPosts.rejected, (state, action) => {
@@ -44,7 +47,8 @@ const postsSlice = createSlice({
       })
       .addCase(addNewPost.fulfilled, (state, action) => {
         state.loading = false;
-        state.posts = [...state.Posts, action.payload];
+        // state.posts = [...state.posts, action.payload];
+        state.posts = [...state.posts, { ...action.payload }];
       })
       .addCase(addNewPost.rejected, (state, action) => {
         state.loading = false;
