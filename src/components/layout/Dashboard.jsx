@@ -1,12 +1,13 @@
+import { BoldArrowIcon, ClockIcon, HeadingsIcon } from "src/assets/SvgsIcons";
 import recordCardData from "../../data/transactionCard";
 import ColoredCard from "../Card/ColoredCard";
 import CreateCard from "../Card/CreateCard";
+import { categoryData } from "src/Pages/Home";
 // import Skelton from "./Skelton";
 
 const Dashboard = () => {
   return (
     <div>
-      {/* <Skelton /> */}
       <div className="p-4">
         <h1 className="text-2xl font-semibold text-gray-800 dark:text-white">
           Good afternoom, Charlie
@@ -33,7 +34,94 @@ const Dashboard = () => {
         )}
       </div>
 
-      <div className="px-4 py-5 border-b rounded-t sm:px-6">
+      <div className=" flex flex-col lg:flex-row items-start gap-6 py-4 px-3 w-full">
+        <div className="w-full lg:w-2/3 space-y-6">
+          <div className="bg-white space-y-5 rounded-xl p-5 ">
+            <article className="group">
+              <div className="flex items-center gap-4 text-lg font-semibold uppercase py-3 border-b mb-4 text-gray-800">
+                <HeadingsIcon />
+                <p>Recent Posts</p>
+              </div>
+
+              <div className="p-4">
+                <a href="#">
+                  <h3 className="text-lg font-medium text-gray-800 hover:text-primary-800 cursor-pointer">
+                    Bayern & Kane face uphill battle to dethrone Leverkusen
+                  </h3>
+                </a>
+                <div className=" flex items-center gap-2 text-sm pb-4 text-gray-600">
+                  <ClockIcon className="w-4 h-4" />
+                  <p className="py-2">20 Aug 2024, 03:55 AM</p>
+                </div>
+                <hr />
+                <div className=" space-y-3 py-5">
+                  <div className=" flex items-center gap-3 text-gray-600 text-sm hover:text-primary-800 cursor-pointer">
+                    <BoldArrowIcon className="w-2.5 h-2.5" />
+                    <p>Fulham sign Palhinha from Sporting Lisbon</p>
+                  </div>
+                  <div className=" flex items-center gap-3 text-gray-600 text-sm hover:text-primary-800 cursor-pointer">
+                    <BoldArrowIcon className="w-2.5 h-2.5" />
+                    <p>
+                      Meet the stand-out NWSL teenager tipped for a USWNT debut
+                    </p>
+                  </div>
+                  <div className=" flex items-center gap-3 text-gray-600 text-sm hover:text-primary-800 cursor-pointer">
+                    <BoldArrowIcon className="w-2.5 h-2.5" />
+                    <p>
+                      Liverpool preparing blockbuster offer for Everton &apos;s
+                      Branthwaite
+                    </p>
+                  </div>
+                  <div className=" flex items-center gap-3 text-gray-600 text-sm hover:text-primary-800 cursor-pointer">
+                    <BoldArrowIcon className="w-2.5 h-2.5" />
+                    <p>
+                      Gundogan is back! Man City confirm midfielder&apos;s
+                      return
+                    </p>
+                  </div>
+                </div>
+                <p className="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Recusandae dolores, possimus pariatur animi temporibus
+                  nesciunt praesentium dolore sed nulla ipsum eveniet corporis
+                  quidem, mollitia itaque minus soluta, voluptates neque
+                  explicabo tempora nisi culpa eius atque dignissimos. Molestias
+                  explicabo corporis voluptatem?
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div className="w-full lg:w-1/3 space-y-6">
+          <div className="bg-white space-y-5 rounded-xl p-5 ">
+            <article className="group">
+              <div className="flex items-center gap-4 text-lg py-3 border-b mb-4 font-semibold uppercase text-gray-800">
+                <p>Top Categories</p>
+              </div>
+
+              <div className="px-4">
+                <div className=" space-y-2 py-5">
+                  {categoryData?.map((catItem, categoryIndex) => (
+                    <div
+                      key={categoryIndex}
+                      className=" flex items-center gap-3 text-gray-800 hover:text-primary-800 cursor-pointer text-base"
+                    >
+                      <img
+                        src={catItem?.icon}
+                        alt="icon "
+                        className="w-7 h-7"
+                      />
+                      <p>{catItem?.name}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      {/* <div className="px-4 py-5 border-b rounded-t sm:px-6">
         <div className="overflow-hidden bg-white shadow dark:bg-gray-800 sm:rounded-md">
           <ul className="divide-y divide-gray-200">
             <li>
@@ -115,7 +203,7 @@ const Dashboard = () => {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

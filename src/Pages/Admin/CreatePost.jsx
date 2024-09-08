@@ -20,6 +20,8 @@ import TextEditor from "../../components/Form/TextEditor";
 import { addNewPost, fetchPosts } from "../../Redux/posts/postsThunk";
 import { ArrowLeft } from "lucide-react";
 import MultipleImageUpload from "../../components/Form/Upload/MultipleImageUpload";
+import { mediaUploader } from "../../components/Form/Upload/UploadImage";
+// import ImageUpload from "../../components/Form/Upload/NewImageUpload";
 const articleFormat = [
   { name: "Article", format: "article" },
   { name: "Video", format: "video" },
@@ -39,6 +41,7 @@ const CreatePost = () => {
 
   const [htmlContent, setHtmlContent] = useState("");
   const [files, setFiles] = useState("");
+  const [imagePost, setImagePost] = useState("");
 
   const { categories } = useSelector((state) => state.category);
   const { authors } = useSelector((state) => state.author);
@@ -62,31 +65,61 @@ const CreatePost = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
+  const handleImage = (e) => {
+    setImagePost(e.target.files[0]);
+  };
+
   const defaultFormValue = {
     short_content: "",
     title: "",
   };
   // console.log("session", selectedCategory);
-  const onSubmit = (data) => {
-    const filteredFormData = {
-      title: data?.title,
-      short_content: data?.short_content,
-      categoryId: selectedCategory?._id,
-      authorId: selectedAuthor?._id,
-      format: selectedFormat?.format,
-      feature: selectedFeature?.feature,
-      content: htmlContent,
-      image:
-        "https://static-bettingadmin.com/betbay/sport/slider/test/6452_Baysbet%20Welcome%20Bonus%20Banner.png",
-    };
 
-    console.log("filtered data", filteredFormData);
-    dispatch(addNewPost(filteredFormData));
-    // alert(JSON.stringify(filteredFormData));
+  const onSubmit = async (data) => {
+    const imagePath = imagePost ? await mediaUploader(imagePost) : null;
 
-    dispatch(fetchPosts("posts/pull?del_flag=0"));
-    navigate("/admin/posts");
+    console.log("imagePath", imagePath);
+
+    if (imagePath !== null || imagePath !== undefined) {
+      const filteredFormData = {
+        media: imagePath,
+        title: data?.title,
+        short_content: data?.short_content,
+        categoryId: selectedCategory?._id,
+        authorId: selectedAuthor?._id,
+        format: selectedFormat?.format,
+        feature: selectedFeature?.feature,
+        content: htmlContent,
+        image: imagePath?.original,
+      };
+
+      // console.log("filtered data", filteredFormData);
+      dispatch(addNewPost(filteredFormData));
+      dispatch(fetchPosts("posts/pull?del_flag=0"));
+      navigate("/admin/posts");
+    }
   };
+  // const onSubmit = async (data) => {
+
+  //   const filteredFormData = {
+  //     title: data?.title,
+  //     short_content: data?.short_content,
+  //     categoryId: selectedCategory?._id,
+  //     authorId: selectedAuthor?._id,
+  //     format: selectedFormat?.format,
+  //     feature: selectedFeature?.feature,
+  //     content: htmlContent,
+  //     image:
+  //       "https://static-bettingadmin.com/betbay/sport/slider/test/6452_Baysbet%20Welcome%20Bonus%20Banner.png",
+  //   };
+
+  //   console.log("filtered data", filteredFormData);
+  //   dispatch(addNewPost(filteredFormData));
+  //   // alert(JSON.stringify(filteredFormData));
+
+  //   dispatch(fetchPosts("posts/pull?del_flag=0"));
+  //   navigate("/admin/posts");
+  // };
 
   return (
     <div className="w-full h-full ">
@@ -153,12 +186,21 @@ const CreatePost = () => {
                   />
 
                   <div className="mb-6">
-                    <MultipleImageUpload
+                    {/* <MultipleImageUpload
                       files={files}
                       setFiles={setFiles}
                       label="Upload Images"
                       className="max-w-[150px]"
+                    /> */}
+                    <input
+                      className="form-control d-none"
+                      name="avatar"
+                      id="member-image-input"
+                      type="file"
+                      accept="image/png, image/gif, image/jpeg"
+                      onChange={handleImage}
                     />
+                    {/* <ImageUpload /> */}
                   </div>
                   <div className="lg:grid grid-cols-2 gap-4">
                     <div className="pb-4">

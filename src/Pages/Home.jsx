@@ -39,6 +39,20 @@ import twitterIcon from "src/assets/images/twitter-icon.png";
 import instagramIcon from "src/assets/images/instagram.png";
 import { Input } from "src/components/Form/Input";
 
+export const categoryData = [
+  { name: "Premier League", icon: Premier },
+  { name: "Champions League", icon: champion },
+  { name: "Bundesliga", icon: Bundesliga },
+  { name: "LaLiga", icon: LaLiga },
+  { name: "Italian Serie A", icon: Italian_Serie_A },
+
+  { name: "Basketball", icon: Basketball },
+
+  { name: "Ligue 1", icon: League },
+  { name: "Transfer Talk", icon: football },
+  { name: "Transfer News", icon: football },
+];
+
 const Home = () => {
   const airtimeData = [
     { name: "MTN", network: "mtn", avatar: mtn },
@@ -47,19 +61,6 @@ const Home = () => {
     { name: "9mobile", network: "9mobile", avatar: mobile },
   ];
 
-  const categoryData = [
-    { name: "Premier League", icon: Premier },
-    { name: "Champions League", icon: champion },
-    { name: "Bundesliga", icon: Bundesliga },
-    { name: "LaLiga", icon: LaLiga },
-    { name: "Italian Serie A", icon: Italian_Serie_A },
-
-    { name: "Basketball", icon: Basketball },
-
-    { name: "Ligue 1", icon: League },
-    { name: "Transfer Talk", icon: football },
-    { name: "Transfer News", icon: football },
-  ];
   const socialData = [
     { name: "Facebook", icon: facebookIcon, url: "https://facebook.com" },
     { name: "Twitter", icon: twitterIcon, url: "https://twitter.com" },
