@@ -2,6 +2,7 @@
   "name": "playaax-react-fe",
   "version": "0.1.0",
   "private": true,
+  "proxy":"https://bi08fsi8i7.execute-api.us-east-1.amazonaws.com",
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
@@ -51,6 +52,7 @@
     "web-vitals": "^2.1.4",
     "yup": "^1.4.0"
   },
+  
   "devDependencies": {
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",

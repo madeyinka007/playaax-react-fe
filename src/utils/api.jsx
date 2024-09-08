@@ -2,11 +2,13 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 // Define base URL
-const baseURL = "https://bi08fsi8i7.execute-api.us-east-1.amazonaws.com/api/";
+const baseURL = "/api/";
 // Create an Axios instance with default configurations
 const axiosInstance = axios.create({
   baseURL,
 });
+
+const Axios = axios.create({baseURL})
 
 // Add request interceptor to add token to headers
 axiosInstance.interceptors.request.use(
@@ -50,15 +52,16 @@ export const getData = async (url, params) => {
 };
 
 // Utility function for POST requests
-export const postData = async (url, data) => {
-  try {
-    const response = await axiosInstance.post(url, data);
-    return response.data;
-  } catch (error) {
-    console.log(error.message);
-    throw error;
-  }
-};
+export const postData = (url, data) =>  Axios.post(url, data)
+// export const postData = async (url, data) => {
+//   try {
+//     const response = await axiosInstance.post(url, data);
+//     return response.data;
+//   } catch (error) {
+//     console.log(error.message);
+//     throw error;
+//   }
+// };
 
 // Utility function for PATCH requests
 export const patchData = async (url, data) => {
