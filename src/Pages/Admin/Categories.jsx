@@ -410,7 +410,7 @@ const Categories = () => {
       {openCreateCategory && (
         <AddCategoryModal
           setOpenModal={setOpenCreateCategory}
-          categoryData={categories?.response}
+          categoryData={categories}
         />
       )}
 

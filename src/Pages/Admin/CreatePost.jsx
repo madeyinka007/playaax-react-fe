@@ -19,6 +19,7 @@ import { Label } from "../../components/Form/Label";
 import TextEditor from "../../components/Form/TextEditor";
 import { addNewPost, fetchPosts } from "../../Redux/posts/postsThunk";
 import { ArrowLeft } from "lucide-react";
+import MultipleImageUpload from "../../components/Form/Upload/MultipleImageUpload";
 const articleFormat = [
   { name: "Article", format: "article" },
   { name: "Video", format: "video" },
@@ -37,6 +38,7 @@ const CreatePost = () => {
   const [selectedFeature, setSelectedFeature] = useState(null);
 
   const [htmlContent, setHtmlContent] = useState("");
+  const [files, setFiles] = useState("");
 
   const { categories } = useSelector((state) => state.category);
   const { authors } = useSelector((state) => state.author);
@@ -122,50 +124,63 @@ const CreatePost = () => {
                       placeholder="Enter a post title"
                     />
                   </div>
-                  <div className="pb-4">
-                    <CustomSelect
-                      label="Category"
-                      selected={selectedCategory}
-                      setSelected={setSelectedCategory}
-                      data={categories}
-                      withImage={false}
-                      placeholder="Select a category"
-                    />
-                  </div>
-                  <div className="pb-4">
-                    <CustomSelect
-                      label="Author"
-                      selected={selectedAuthor}
-                      setSelected={setSelectedAuthor}
-                      data={authors}
-                      withImage={false}
-                      placeholder="Select an author"
-                    />
+                  <div className="lg:grid grid-cols-2 gap-4">
+                    <div className="pb-4">
+                      <CustomSelect
+                        label="Category"
+                        selected={selectedCategory}
+                        setSelected={setSelectedCategory}
+                        data={categories}
+                        withImage={false}
+                        placeholder="Select a category"
+                      />
+                    </div>
+                    <div className="pb-4">
+                      <CustomSelect
+                        label="Author"
+                        selected={selectedAuthor}
+                        setSelected={setSelectedAuthor}
+                        data={authors}
+                        withImage={false}
+                        placeholder="Select an author"
+                      />
+                    </div>
                   </div>
                   <TextArea
                     name="short_content"
                     label="Short Description"
                     placholder="Enter a description"
                   />
-                  <div className="pb-4">
-                    <CustomSelect
-                      label="Format"
-                      selected={selectedFormat}
-                      setSelected={setSelectedFormat}
-                      data={articleFormat}
-                      withImage={false}
-                      placeholder="Select a format"
+
+                  <div className="mb-6">
+                    <MultipleImageUpload
+                      files={files}
+                      setFiles={setFiles}
+                      label="Upload Images"
+                      className="max-w-[150px]"
                     />
                   </div>
-                  <div className="pb-4">
-                    <CustomSelect
-                      label="Features"
-                      selected={selectedFeature}
-                      setSelected={setSelectedFeature}
-                      data={featureData}
-                      withImage={false}
-                      placeholder="Select a feature"
-                    />
+                  <div className="lg:grid grid-cols-2 gap-4">
+                    <div className="pb-4">
+                      <CustomSelect
+                        label="Format"
+                        selected={selectedFormat}
+                        setSelected={setSelectedFormat}
+                        data={articleFormat}
+                        withImage={false}
+                        placeholder="Select a format"
+                      />
+                    </div>
+                    <div className="pb-4">
+                      <CustomSelect
+                        label="Features"
+                        selected={selectedFeature}
+                        setSelected={setSelectedFeature}
+                        data={featureData}
+                        withImage={false}
+                        placeholder="Select a feature"
+                      />
+                    </div>
                   </div>
                   <div>
                     <Label text="Write content for the post" className="pb-2" />
