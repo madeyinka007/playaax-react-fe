@@ -71,7 +71,7 @@ const Categories = () => {
   const { categories, category, loading, error } = useSelector(
     (state) => state.category
   );
-  // console.log("categories podt", categories);
+  console.log("categories podt", categories);
 
   const fetchCategorysHandler = () => {
     dispatch(fetchCategorys("posts/category/pull?del_flag=0"));
@@ -230,7 +230,7 @@ const Categories = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {categories?.response?.map((item, rowIndex) => {
+                      {categories?.map((item, rowIndex) => {
                         return (
                           <tr
                             key={rowIndex}

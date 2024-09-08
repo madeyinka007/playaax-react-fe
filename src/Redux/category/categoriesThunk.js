@@ -26,7 +26,7 @@ const addNewCategory = createAsyncThunk(
     try {
       const response = await postData("posts/category/add", CategoryData);
 
-      if (response?.message === "Success!") {
+      if (response?.status === 201) {
         toast.success("Category created successfully!");
 
         dispatch(fetchCategorys("posts/category/pull?del_flag=0"));

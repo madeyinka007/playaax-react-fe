@@ -89,7 +89,7 @@ const HeroSlider = () => {
                       <div className="tp-slide-item__img rounded-lg">
                         <img
                           src={item?.image}
-                          className=" rounded-lg h-80 md:h-96 w-full object-cover min-h-[250px]  "
+                          className=" rounded-lg h-80 md:h-96  lg:h-[500px] w-full object-cover min-h-[250px]  "
                           alt=""
                         />
                       </div>

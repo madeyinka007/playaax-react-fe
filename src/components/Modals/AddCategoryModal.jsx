@@ -43,7 +43,7 @@ const AddCategoryModal = ({ setOpenModal, categoryData }) => {
     // alert(JSON.stringify(filteredFormData));
 
     setOpenModal(false);
-    dispatch(fetchCategorys());
+    dispatch(fetchCategorys("posts/category/pull?del_flag=0"));
     navigate("/admin/category");
   };
 
