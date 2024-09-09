@@ -1,4 +1,5 @@
-import { useState } from "react";
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import { useEffect, useState } from "react";
 import { BoldArrowIcon, ClockIcon, HeadingsIcon } from "../assets/SvgsIcons";
 import { Button } from "../components/Form/Button";
 import Header from "../components/Header";
@@ -38,6 +39,11 @@ import facebookIcon from "src/assets/images/facebook-icon.png";
 import twitterIcon from "src/assets/images/twitter-icon.png";
 import instagramIcon from "src/assets/images/instagram.png";
 import { Input } from "src/components/Form/Input";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPosts } from "src/Redux/posts/postsThunk";
+import { formatDateTime } from "src/utils/constant";
+import LoadingSpinner from "src/components/Loading/LoadingSpinner";
+import { Link } from "react-router-dom";
 
 export const categoryData = [
   { name: "Premier League", icon: Premier },
@@ -54,6 +60,7 @@ export const categoryData = [
 ];
 
 const Home = () => {
+  const dispatch = useDispatch();
   const airtimeData = [
     { name: "MTN", network: "mtn", avatar: mtn },
     { name: "GLO", network: "glo", avatar: glo },
@@ -82,6 +89,23 @@ const Home = () => {
     "transfer",
   ];
   const [selectedAirtime, setSelectedAirtime] = useState(airtimeData[0]);
+
+  const { posts, post, loading, error } = useSelector((state) => state.posts);
+  // console.log("all posts", posts);
+
+  const lastPost = posts[posts.length - 1];
+  const lastThreePost = posts?.slice(-4, -1);
+
+  console.log("last  data", lastPost);
+
+  const fetchPostsHandler = () => {
+    dispatch(fetchPosts());
+  };
+  useEffect(() => {
+    fetchPostsHandler();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
+
   const defaultFormValue = {
     name: "",
     brand_id: "",
@@ -357,6 +381,7 @@ const Home = () => {
                         href={socialItem?.url}
                         target="_blank"
                         key={socialIndex}
+                        rel="noreferrer"
                       >
                         <div className=" flex items-center gap-3 text-gray-800 hover:text-primary-800 cursor-pointer text-base border-b border-dashed pb-3">
                           <img
@@ -397,35 +422,54 @@ const Home = () => {
                   </a>
                 </div>
               </div>
-              <article className="group">
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                  className="h-56 w-full rounded-xl object-cover shadow-xl transition "
-                />
+              {loading ? (
+                <LoadingSpinner />
+              ) : (
+                <article className="group">
+                  <img
+                    alt=""
+                    src={
+                      lastPost?.image
+                        ? lastPost?.image
+                        : "https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                    }
+                    className="h-64 lg:h-full w-full rounded-xl object-cover shadow-xl transition "
+                  />
 
-                <div className="p-4">
-                  <a href="#">
-                    <h3 className="text-lg font-medium line-clamp-2 text-gray-800 hover:text-primary-800 cursor-pointer">
-                      Bayern & Kane face uphill battle to dethrone Leverkusen
-                    </h3>
-                  </a>
-                  <div className=" flex items-center gap-2 text-sm pb-4 text-gray-600">
-                    <ClockIcon className="w-4 h-4" />
-                    <p className="py-2">20 Aug 2024, 03:55 AM</p>
-                  </div>
-                  <hr />
-                  <div className=" space-y-3 pt-5">
-                    <div className=" flex items-center gap-3 text-gray-600 text-sm hover:text-primary-800 cursor-pointer">
-                      <BoldArrowIcon className="w-2.5 h-2.5" />
-                      <p className="line-clamp-3 text-sm/relaxed">
-                        Fulham sign Palhinha from Sporting Lisbon Why Chelsea
-                        spending spree on transfers could backfire in a big way
+                  <div className="p-4">
+                    <Link to={`/posts/${lastPost?._id}`}>
+                      <h3 className="text-lg font-medium line-clamp-2 text-gray-800 hover:text-primary-800 cursor-pointer">
+                        {lastPost?.short_content}
+                      </h3>
+                    </Link>
+                    <div className=" flex items-center gap-2 text-sm pb-4 text-gray-600">
+                      <ClockIcon className="w-4 h-4" />
+
+                      <p className="py-2">
+                        {formatDateTime(lastPost?.createdAt)}
                       </p>
                     </div>
+                    <hr />
+                    <div className=" space-y-3 pt-5">
+                      {lastThreePost?.map(
+                        (postlastthree, lastThreePostIndex) => (
+                          <div
+                            key={lastThreePostIndex}
+                            className=" flex items-center gap-3 text-gray-600 text-sm hover:text-primary-800 cursor-pointer"
+                          >
+                            <BoldArrowIcon className="w-2.5 h-2.5" />
+                            <Link to={`/posts/${postlastthree?._id}`}>
+                              <p className="line-clamp-3 text-sm/relaxed">
+                                {postlastthree?.title}
+                              </p>
+                            </Link>
+                          </div>
+                        )
+                      )}
+                    </div>
                   </div>
-                </div>
-              </article>
+                </article>
+              )}
             </div>
           </div>
           <div className="w-full lg:w-1/4 space-y-6">

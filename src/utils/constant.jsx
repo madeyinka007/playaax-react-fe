@@ -51,7 +51,7 @@ export function formatDateTime(dateString) {
   const minutes = date.getMinutes().toString().padStart(2, "0");
   const ampm = date.getHours() >= 12 ? "PM" : "AM";
 
-  return `${dayOfWeek} ${day} ${month} ${year} ${hours}:${minutes} ${ampm}`;
+  return `${dayOfWeek} ${day} ${month} ${year}, ${hours}:${minutes} ${ampm}`;
 }
 
 export function formatShortDate(dateString) {

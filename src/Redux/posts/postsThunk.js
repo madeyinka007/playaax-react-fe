@@ -7,9 +7,9 @@ const POST_URL = "admin/Post";
 
 const fetchPosts = createAsyncThunk(
   "admin/fetchPost",
-  async (url, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
-      const response = await getData(url);
+      const response = await getData("posts/pull?del_flag=0");
       return response;
     } catch (error) {
       const errorMessage = error;
@@ -56,7 +56,7 @@ const fetchPost = createAsyncThunk(
   "getPost",
   async (id, { rejectWithValue }) => {
     try {
-      const response = await getData(`${POST_URL}/${id}`);
+      const response = await getData(`posts/by-identity?identity=${id}`);
       return response;
     } catch (error) {
       const errorMessage = error;
