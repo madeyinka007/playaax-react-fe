@@ -288,11 +288,27 @@ const Categories = () => {
                               )}
                             </td>
 
-                            <td
-                              onClick={() => fetchSingleCategory(item?._id)}
-                              className="px-6 py-5 whitespace-nowrap cursor-pointer"
-                            >
-                              <EyeIconBold />
+                            <td className="px-6 py-5 ">
+                              <div className=" flex items-center gap-2">
+                                <div
+                                  className="cursor-pointer "
+                                  onClick={() => fetchSingleCategory(item?._id)}
+                                >
+                                  <EyeIconBold />
+                                </div>
+                                <div
+                                  className="cursor-pointer "
+                                  // onClick={() => checkDetail(item)}
+                                >
+                                  <EditIcon />
+                                </div>
+                                <div
+                                  className="cursor-pointer pl-2"
+                                  // onClick={() => deleteProductHandler(item?.id)}
+                                >
+                                  <DeleteIcon className="text-red-600 w-6 h-6 " />
+                                </div>
+                              </div>
                             </td>
                           </tr>
                         );
