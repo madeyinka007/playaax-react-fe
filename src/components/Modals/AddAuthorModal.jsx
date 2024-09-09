@@ -5,6 +5,7 @@ import HookForm from "src/components/Form/Form";
 import { Input } from "src/components/Form/Input";
 import { TextArea } from "src/components/Form/TextArea";
 // import CustomSelect from "src/components/Form/Select/CustomSelect";
+import MediaUploader from "src/components/Form/Upload/uploaderv2";
 
 import { useNavigate } from "react-router-dom";
 
@@ -14,12 +15,14 @@ import CloseModal from "./CloseModal";
 import { useDispatch } from "react-redux";
 
 import { addNewAuthor, fetchAuthors } from "../../Redux/author/authorThunk";
+import { useState } from "react";
 
 // eslint-disable-next-line react/prop-types
 const AddAuthorModal = ({ setOpenModal }) => {
   // console.log("sgow", categoryData);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [files, setFiles] = useState("");
 
   // const [selectedCategory, setSelectedCategory] = useState(null);
   const defaultFormValue = {
@@ -31,8 +34,7 @@ const AddAuthorModal = ({ setOpenModal }) => {
     const filteredFormData = {
       profile: data?.profile,
       name: data?.name,
-
-      image: "profile-dp.jpg",
+      image: files?.original,
     };
 
     console.log("filtered data", filteredFormData);
@@ -81,6 +83,14 @@ const AddAuthorModal = ({ setOpenModal }) => {
                       name="profile"
                       label="Profile Description"
                       placholder="Enter a description"
+                    />
+                  </div>
+                  <div className="mb-6">
+                    <MediaUploader
+                      files={files}
+                      setFiles={setFiles}
+                      label="Upload Profile Images"
+                      className="max-w-[320px]"
                     />
                   </div>
                 </div>
