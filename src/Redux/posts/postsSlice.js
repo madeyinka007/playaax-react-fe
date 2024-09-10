@@ -5,12 +5,14 @@ import {
   fetchPost,
   updatePost,
   deletePost,
+  fetchPostCategory,
 } from "./postsThunk";
 // / Import the new thunk action creators
 
 const initialState = {
   posts: [],
   post: [],
+  postCategory: [],
   loading: false,
   error: null,
 };
@@ -38,6 +40,23 @@ const postsSlice = createSlice({
       .addCase(fetchPosts.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload ?? "Failed to fetch posts";
+      })
+
+      .addCase(fetchPostCategory.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchPostCategory.fulfilled, (state, action) => {
+        state.loading = false;
+        // state.posts = action.payload;
+        state.postCategory = Array.isArray(action.payload.response)
+          ? action.payload.response
+          : [];
+      })
+
+      .addCase(fetchPostCategory.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload ?? "Failed to fetch posts category";
       })
 
       // addNewPost
