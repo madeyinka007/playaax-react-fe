@@ -2,7 +2,7 @@ import { BoldArrowIcon, ClockIcon, HeadingsIcon } from "src/assets/SvgsIcons";
 import recordCardData from "../../data/transactionCard";
 import ColoredCard from "../Card/ColoredCard";
 import CreateCard from "../Card/CreateCard";
-import { categoryData } from "src/Pages/Home";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchCategorys } from "src/Redux/category/categoriesThunk";
