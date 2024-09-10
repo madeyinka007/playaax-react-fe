@@ -8,9 +8,9 @@ const CATEGORY_URL = "admin/category";
 
 const fetchCategorys = createAsyncThunk(
   "admin/fetchCategory",
-  async (url, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
-      const response = await getData(url);
+      const response = await getData("posts/category/pull?del_flag=0");
       return response;
     } catch (error) {
       const errorMessage = error;
@@ -63,7 +63,7 @@ const updateCategory = createAsyncThunk(
     // console.log("Edit Id Enter here", id);
     // console.log("Edit formdata Enter here ", formData);
     try {
-      const response = await putData(`${CATEGORY_URL}/${id}`, formData);
+      const response = await postData(`posts/category/modify/${id}`, formData);
       if (
         response?.status === 202 ||
         response?.status === 200 ||
