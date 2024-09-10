@@ -108,7 +108,13 @@ const Home = () => {
   const lastPost = posts[posts.length - 1];
   const lastThreePost = posts?.slice(-4, -1);
 
-  console.log("last  data", lastPost);
+  // console.log("last  data", lastPost);
+
+  // const posts = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const randomIndex = Math.floor(Math.random() * posts.length);
+  const randomPost = posts[randomIndex];
+
+  console.log("randomPost", randomPost);
 
   const fetchPostsHandler = () => {
     dispatch(fetchPosts());
@@ -411,7 +417,7 @@ const Home = () => {
             </div>
           </div>
           <div className="w-full order-first lg:order-none lg:w-2/4 space-y-6">
-            <HeroSlider />
+            <HeroSlider sliderdata={posts} />
 
             <div className="bg-white space-y-5 rounded-xl p-5 ">
               <div className=" flex items-center justify-between ">
@@ -492,58 +498,49 @@ const Home = () => {
                   <HeadingsIcon />
                   <p>Top Headlines</p>
                 </div>
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                  className="h-56 w-full rounded-xl object-cover shadow-xl transition "
-                />
-
                 <div className="p-4">
-                  <a href="#">
-                    <h3 className="text-lg font-medium text-gray-800 hover:text-primary-800 cursor-pointer">
-                      Bayern & Kane face uphill battle to dethrone Leverkusen
-                    </h3>
-                  </a>
-                  <div className=" flex items-center gap-2 text-sm pb-4 text-gray-600">
+                  {loading ? (
+                    <LoadingSpinner />
+                  ) : (
+                    <div>
+                      <img
+                        alt=""
+                        src={randomPost?.image}
+                        className="h-56 w-full rounded-xl object-cover shadow-xl transition "
+                      />
+
+                      <div className="">
+                        <Link
+                          to={`/posts/${randomPost?._id}`}
+                          className="pb-4 block"
+                        >
+                          <h3 className="text-lg pt-4 font-medium text-gray-800 hover:text-primary-800 cursor-pointer">
+                            {randomPost?.title}
+                          </h3>
+                        </Link>
+                        {/* <div className=" flex items-center gap-2 text-sm pb-4 text-gray-600">
                     <ClockIcon className="w-4 h-4" />
-                    <p className="py-2">20 Aug 2024, 03:55 AM</p>
-                  </div>
-                  <hr />
+                    <p className="py-2">
+                      {formatDateTime(randomPost?.createdAt)}
+                    </p>
+                  </div> */}
+                        <hr />
+                      </div>
+                    </div>
+                  )}
                   <div className=" space-y-3 py-5">
-                    <div className=" flex items-center gap-3 text-gray-600 text-sm hover:text-primary-800 cursor-pointer">
-                      <BoldArrowIcon className="w-2.5 h-2.5" />
-                      <p>Fulham sign Palhinha from Sporting Lisbon</p>
-                    </div>
-                    <div className=" flex items-center gap-3 text-gray-600 text-sm hover:text-primary-800 cursor-pointer">
-                      <BoldArrowIcon className="w-2.5 h-2.5" />
-                      <p>
-                        Meet the stand-out NWSL teenager tipped for a USWNT
-                        debut
-                      </p>
-                    </div>
-                    <div className=" flex items-center gap-3 text-gray-600 text-sm hover:text-primary-800 cursor-pointer">
-                      <BoldArrowIcon className="w-2.5 h-2.5" />
-                      <p>
-                        Liverpool preparing blockbuster offer for Everton
-                        &apos;s Branthwaite
-                      </p>
-                    </div>
-                    <div className=" flex items-center gap-3 text-gray-600 text-sm hover:text-primary-800 cursor-pointer">
-                      <BoldArrowIcon className="w-2.5 h-2.5" />
-                      <p>
-                        Gundogan is back! Man City confirm midfielder&apos;s
-                        return
-                      </p>
-                    </div>
+                    {posts?.slice(0, 11)?.map((sideBlog, sideBlogIndex) => (
+                      <div
+                        key={sideBlogIndex}
+                        className=" flex items-center gap-3 text-gray-600 text-sm hover:text-primary-800 cursor-pointer"
+                      >
+                        <BoldArrowIcon className="w-2.5 h-2.5" />
+                        <Link to={`/posts/${sideBlog?._id}`}>
+                          <p>{sideBlog?.title}</p>
+                        </Link>
+                      </div>
+                    ))}
                   </div>
-                  <p className="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Recusandae dolores, possimus pariatur animi temporibus
-                    nesciunt praesentium dolore sed nulla ipsum eveniet corporis
-                    quidem, mollitia itaque minus soluta, voluptates neque
-                    explicabo tempora nisi culpa eius atque dignissimos.
-                    Molestias explicabo corporis voluptatem?
-                  </p>
                 </div>
               </article>
             </div>

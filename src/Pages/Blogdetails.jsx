@@ -80,7 +80,7 @@ const Blogdetails = () => {
                       language: "zh_TW", //e.g. for Traditional Chinese (Taiwan)
                     }}
                   /> */}
-                  <div className="my-10">
+                  {/* <div className="my-10">
                     <DiscussionEmbed
                       shortname="playaax-com"
                       config={{
@@ -90,7 +90,7 @@ const Blogdetails = () => {
                         // language: "zh_TW", //e.g. for Traditional Chinese (Taiwan)
                       }}
                     />
-                  </div>
+                  </div> */}
                   <div className="flex flex-col sm:flex-row justify-between">
                     {/* <div className="">
                       <h1 className="text-18 text-gray-800 font-semibold">

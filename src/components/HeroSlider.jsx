@@ -61,7 +61,12 @@ const swiperOptions = {
     clickable: true,
   },
 };
-const HeroSlider = () => {
+const HeroSlider = ({ sliderdata }) => {
+  console.log(
+    "firstSlider",
+    sliderdata?.filter((post) => post?.feature === "slider")
+  );
+  const sliderPosts = sliderdata?.filter((post) => post?.feature === "slider");
   return (
     <div className=" ">
       <div className="flex flex-col lg:flex-row items-start gap-x-4 w-full">
@@ -69,30 +74,33 @@ const HeroSlider = () => {
           <div className="tp-slider-area relative">
             <div className="swiper-container slider-active">
               <Swiper {...swiperOptions}>
-                {sliderData.map((item, index) => (
+                {sliderPosts.map((item, index) => (
                   <SwiperSlide key={index}>
                     <div className="tp-slide-item relative rounded">
-                      <div className=" max-w-xs  md:max-w-sm lg:max-w-md  absolute left-4 bottom-10 md:left-8 md:bottom-16 lg:left-10 xl:left-12 lg:bottom-20  ">
+                      <div className=" max-w-xs z-30 md:max-w-sm lg:max-w-md  absolute left-4 bottom-10 md:left-8 md:bottom-16 lg:left-10 xl:left-12 lg:bottom-20  ">
                         <div className="pb-3">
-                          <DefaultBadge text={item?.category} />
+                          <DefaultBadge text={item?.category?.label} />
                         </div>
                         <h3 className="text-white text-xl lg:text-3xl font-bold line-clamp-2">
                           {item?.title}
                         </h3>
                         <p className="text-sm line-clamp-2  text-gray-300 pt-2">
-                          {item?.description}
+                          {item?.short_content}
                         </p>
                         <Link className=" block pt-4" to="/shop">
                           <Button size="md">Continue Reading</Button>
                         </Link>
                       </div>
                       <div className="tp-slide-item__img rounded-lg">
+                        {/* <div className=" relative"> */}
                         <img
                           src={item?.image}
                           className=" rounded-lg h-80 md:h-96  lg:h-[500px] w-full object-cover min-h-[250px]  "
                           alt=""
                         />
+                        <div className=" absolute inset-0 bg-black/40 rounded-lg"></div>
                       </div>
+                      {/* </div> */}
                     </div>
                   </SwiperSlide>
                 ))}
