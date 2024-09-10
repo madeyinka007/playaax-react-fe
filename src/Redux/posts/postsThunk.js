@@ -19,6 +19,22 @@ const fetchPosts = createAsyncThunk(
   }
 );
 
+const fetchPostCategory = createAsyncThunk(
+  "getPostCategory",
+  async (slug, { rejectWithValue }) => {
+    try {
+      const response = await getData(
+        `posts/pull?del_flag=0&category.slug=${slug}`
+      );
+      return response;
+    } catch (error) {
+      const errorMessage = error;
+      console.log(errorMessage);
+      return rejectWithValue(errorMessage?.response?.data);
+    }
+  }
+);
+
 const addNewPost = createAsyncThunk(
   "addNewPost",
   async (PostData, { rejectWithValue, dispatch }) => {
@@ -132,4 +148,11 @@ const deletePost = createAsyncThunk(
   }
 );
 
-export { fetchPosts, addNewPost, fetchPost, updatePost, deletePost };
+export {
+  fetchPosts,
+  addNewPost,
+  fetchPost,
+  updatePost,
+  deletePost,
+  fetchPostCategory,
+};

@@ -45,6 +45,7 @@ import { formatDateTime } from "src/utils/constant";
 import LoadingSpinner from "src/components/Loading/LoadingSpinner";
 import { Link } from "react-router-dom";
 import { fetchCategorys } from "src/Redux/category/categoriesThunk";
+import CategoryItem from "src/components/ui/CategoryItem";
 
 export const categoryData = [
   { name: "Premier League", icon: Premier },
@@ -145,7 +146,7 @@ const Home = () => {
   return (
     <>
       <Header />
-      <div className="pt-[68px]">
+      <div className="pt-[76px]">
         <Headlines />
       </div>
       <div className="px-4 bg-gray-100">
@@ -163,21 +164,7 @@ const Home = () => {
                 </div>
 
                 <div className="px-4">
-                  <div className=" space-y-2.5 py-5">
-                    {categories?.map((catItem, categoryIndex) => (
-                      <div
-                        key={categoryIndex}
-                        className=" flex items-center gap-3 text-gray-800 hover:text-primary-800 cursor-pointer text-base"
-                      >
-                        <img
-                          src={catItem?.icon}
-                          alt="icon "
-                          className="w-7 h-7"
-                        />
-                        <p>{catItem?.label}</p>
-                      </div>
-                    ))}
-                  </div>
+                  <CategoryItem categories={categories} />
                 </div>
               </article>
             </div>
