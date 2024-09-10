@@ -6,7 +6,7 @@ export const categorySchema = yup
       .string()
       .required("Category name is required")
       .min(3, "Minimum 3 characters length"),
-    description: yup.string().required("Category description is required"),
+    // description: yup.string().required("Category description is required"),
 
     // email: yup
     //   .string()
