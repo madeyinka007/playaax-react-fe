@@ -12,6 +12,7 @@ import CreatePost from "./Pages/Admin/CreatePost";
 import Categories from "./Pages/Admin/Categories";
 import Authors from "./Pages/Admin/Authors";
 import EditPost from "./Pages/Admin/EditPost";
+import CategoryBlock from "./Pages/CategoryBlock";
 
 function App() {
   return (
@@ -23,7 +24,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/posts/:_id" element={<Blogdetails />} />
 
-          <Route path="/category" element={<Category />} />
+          <Route path="/category/:slug" element={<CategoryBlock />} />
+          <Route path="/category-1" element={<Category />} />
         </Route>
 
         <Route path="admin" element={<MainDashboardLayout />}>
