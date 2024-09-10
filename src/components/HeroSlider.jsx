@@ -87,7 +87,10 @@ const HeroSlider = ({ sliderdata }) => {
                         <p className="text-sm line-clamp-2  text-gray-300 pt-2">
                           {item?.short_content}
                         </p>
-                        <Link className=" block pt-4" to="/shop">
+                        <Link
+                          className=" block pt-4"
+                          to={`/posts/${item?._id}`}
+                        >
                           <Button size="md">Continue Reading</Button>
                         </Link>
                       </div>
