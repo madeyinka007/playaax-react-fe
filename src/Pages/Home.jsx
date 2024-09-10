@@ -44,6 +44,7 @@ import { fetchPosts } from "src/Redux/posts/postsThunk";
 import { formatDateTime } from "src/utils/constant";
 import LoadingSpinner from "src/components/Loading/LoadingSpinner";
 import { Link } from "react-router-dom";
+import { fetchCategorys } from "src/Redux/category/categoriesThunk";
 
 export const categoryData = [
   { name: "Premier League", icon: Premier },
@@ -92,6 +93,17 @@ const Home = () => {
 
   const { posts, post, loading, error } = useSelector((state) => state.posts);
   // console.log("all posts", posts);
+
+  const { categories } = useSelector((state) => state.category);
+  console.log("all categories", categories);
+
+  const fetchCategorysHandler = () => {
+    dispatch(fetchCategorys());
+  };
+  useEffect(() => {
+    fetchCategorysHandler();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
   const lastPost = posts[posts.length - 1];
   const lastThreePost = posts?.slice(-4, -1);
@@ -145,8 +157,8 @@ const Home = () => {
                 </div>
 
                 <div className="px-4">
-                  <div className=" space-y-2 py-5">
-                    {categoryData?.map((catItem, categoryIndex) => (
+                  <div className=" space-y-2.5 py-5">
+                    {categories?.map((catItem, categoryIndex) => (
                       <div
                         key={categoryIndex}
                         className=" flex items-center gap-3 text-gray-800 hover:text-primary-800 cursor-pointer text-base"
@@ -156,7 +168,7 @@ const Home = () => {
                           alt="icon "
                           className="w-7 h-7"
                         />
-                        <p>{catItem?.name}</p>
+                        <p>{catItem?.label}</p>
                       </div>
                     ))}
                   </div>
