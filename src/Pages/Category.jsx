@@ -1,75 +1,11 @@
+import DefaultBadge from "src/components/Form/DefaultBadge";
+import { Link } from "react-router-dom";
+import { ClockIcon } from "src/assets/SvgsIcons";
+
 const Category = () => {
   return (
     <div>
-      <div
-        className="nc-Card3 relative flex flex-col-reverse sm:flex-row sm:items-center rounded-[40px] group "
-        data-nc-id="Card3"
-      >
-        <div className="flex flex-col flex-grow">
-          <div className="space-y-5 mb-4">
-            <span className="nc-Badge inline-flex px-2.5 py-1 rounded-full font-medium text-xs relative text-blue-800 bg-blue-100  ">
-              Life
-            </span>
-            <div>
-              <h2 className="nc-card-title block font-semibold text-neutral-900 dark:text-neutral-100 text-xl">
-                <a
-                  className="line-clamp-2 capitalize"
-                  title="title"
-                  href="/ciseco/blog-signle"
-                >
-                  in mollis nunc sed id semper risus in hendrerit gravida
-                </a>
-              </h2>
-              <div className="hidden sm:block sm:mt-2">
-                <span className="text-neutral-500 dark:text-neutral-400 text-base line-clamp-1">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Consectetur, culpa?
-                </span>
-              </div>
-            </div>
-            <div
-              className="nc-PostCardMeta inline-flex items-center fledx-wrap text-neutral-800 dark:text-neutral-200 text-sm leading-none"
-              data-nc-id="PostCardMeta"
-            >
-              <a
-                className="flex-shrink-0 relative flex items-center space-x-2"
-                href="/ciseco/blog"
-              >
-                <div className="wil-avatar relative flex-shrink-0 inline-flex items-center justify-center text-neutral-100 uppercase font-semibold shadow-inner rounded-full h-7 w-7 text-sm ring-1 ring-white dark:ring-neutral-900">
-                  <img
-                    className="absolute inset-0 w-full h-full object-cover rounded-full"
-                    src="./static/media/Image-10.93048ca791076288cf69.png"
-                    alt="John Doe"
-                  />
-                  <span className="wil-avatar__name">J</span>
-                </div>
-                <span className="block text-neutral-6000 hover:text-black dark:text-neutral-300 dark:hover:text-white font-medium">
-                  Malakai Cey
-                </span>
-              </a>
-              <span className="text-neutral-500 dark:text-neutral-400 mx-[6px] font-medium">
-                ·
-              </span>
-              <span className="text-neutral-500 dark:text-neutral-400 font-normal line-clamp-1">
-                May 20, 2021
-              </span>
-            </div>
-          </div>
-        </div>
-        <div className="block  max-w-xs flex-shrink-0 sm:w-56 sm:ml-6 rounded-3xl overflow-hidden mb-5 sm:mb-0">
-          <a className="block w-full " href="/ciseco/blog-single">
-            <div className="nc-NcImage absolute inset-0" data-nc-id="NcImage">
-              {/* <img
-                src="https://images.pexels.com/photos/10343244/pexels-photo-10343244.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
-                className="object-cover w-full h-full"
-                alt="nc-imgs"
-              /> */}
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div className="nc-SectionLatestPosts relative py-16 lg:py-28">
+      <div className="nc-SectionLatestPosts relative py-16 lg:py-28 bg-gray-100">
         <div className="flex flex-col lg:flex-row">
           <div className="w-full lg:w-3/5 xl:w-2/3 xl:pr-14">
             <div className="nc-Section-Heading relative flex flex-col sm:flex-row sm:items-end justify-between mb-12 lg:mb-14 text-neutral-900 dark:text-neutral-50">
@@ -80,13 +16,47 @@ const Category = () => {
               </div>
             </div>
             <div className="grid gap-6 md:gap-8 grid-cols-1">
+              <div className="px-4 lg:p-6 py-5 bg-white rounded-xl group mb-6">
+                <Link
+                  to={`/posts/`}
+                  className="flex gap-2 sm:gap-[25px] items-center  "
+                >
+                  <div className="w-60 h-60 rounded-md overflow-hidden bg-red-100">
+                    <img
+                      src="https://media.gettyimages.com/id/2166274356/photo/competitive-siblings-playing-basket-ball-recreational-pursuit.jpg?s=2048x2048&w=gi&k=20&c=BZEg4MGu-MAiO1_g2t0YeFfcDm0psJKfaEzrDIzIo3Q="
+                      alt=""
+                      className="w-full h-60 object-cover group-hover:scale-110 transition-all duration-300"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <DefaultBadge
+                      className="text-gray-600 bg-gray-50"
+                      text="Premeier Leaugue"
+                    />
+
+                    <p className="text-gray-800 font-semibold mt-1.5 pb-2 text-2xl transition-all duration-300 line-clamp-2 group-hover:underline">
+                      Bayern & Kane face uphill battle to dethrone Leverkusen
+                      blogItem?.title
+                    </p>
+                    <p className=" text-gray-600">
+                      Enzo Maresca addresses Raheem Sterling and Ben Chilwell's
+                      situations at Chelsea as they could be set to…
+                    </p>
+                    <div className=" flex items-center gap-2 text-sm pb-4 text-gray-600">
+                      <ClockIcon className="w-4 h-4" />
+
+                      <p className="py-2">Tue 10 Sep 2024, 7:32 AM</p>
+                    </div>
+                  </div>
+                </Link>
+              </div>
               <div
                 className="nc-Card3 relative flex flex-col-reverse sm:flex-row sm:items-center rounded-[40px] group "
                 data-nc-id="Card3"
               >
                 <div className="flex flex-col flex-grow">
                   <div className="space-y-5 mb-4">
-                    <span className="nc-Badge inline-flex px-2.5 py-1 rounded-full font-medium text-xs relative text-blue-800 bg-blue-100  relative">
+                    <span className="nc-Badge inline-flex px-2.5 py-1 rounded-full font-medium text-xs relative text-blue-800 bg-blue-100  ">
                       Life
                     </span>
                     <div>
@@ -146,8 +116,8 @@ const Category = () => {
                       data-nc-id="NcImage"
                     >
                       <img
-                        src="https://images.pexels.com/photos/10343244/pexels-photo-10343244.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
-                        className="object-cover w-full h-full"
+                        src="https://media.gettyimages.com/id/2166274356/photo/competitive-siblings-playing-basket-ball-recreational-pursuit.jpg?s=2048x2048&w=gi&k=20&c=BZEg4MGu-MAiO1_g2t0YeFfcDm0psJKfaEzrDIzIo3Q="
+                        className="object-cover w-44 h-44"
                         alt="nc-imgs"
                       />
                     </div>
