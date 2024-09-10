@@ -302,13 +302,14 @@ const extensions = [
   }),
 ];
 
-const TextEditor = ({ htmlContent, setHtmlContent }) => {
+const TextEditor = ({ htmlContent, setHtmlContent, content }) => {
   return (
     <div className="border border-gray-200 p-5 rounded-xl">
       <EditorProvider
         slotBefore={
           <MenuBar htmlContent={htmlContent} setHtmlContent={setHtmlContent} />
         }
+        content={content}
         extensions={extensions}
       ></EditorProvider>
     </div>

@@ -11,6 +11,7 @@ import Posts from "./Pages/Admin/Posts";
 import CreatePost from "./Pages/Admin/CreatePost";
 import Categories from "./Pages/Admin/Categories";
 import Authors from "./Pages/Admin/Authors";
+import EditPost from "./Pages/Admin/EditPost";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="posts" element={<Posts />}></Route>
 
           <Route path="posts/create" element={<CreatePost />}></Route>
+          <Route path="posts/update/:_id" element={<EditPost />} />
           <Route path="category" element={<Categories />}></Route>
           <Route path="author" element={<Authors />}></Route>
         </Route>

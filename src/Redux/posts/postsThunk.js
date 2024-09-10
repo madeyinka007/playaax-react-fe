@@ -40,7 +40,7 @@ const addNewPost = createAsyncThunk(
         //     message: "Post created successfully",
         //   })
         // );
-        dispatch(fetchPosts("posts/pull?del_flag=0"));
+        dispatch(fetchPosts());
       }
       console.log("Post create response", response);
     } catch (error) {
@@ -72,7 +72,7 @@ const updatePost = createAsyncThunk(
     // console.log("Edit Id Enter here", id);
     // console.log("Edit formdata Enter here ", formData);
     try {
-      const response = await putData(`${POST_URL}/${id}`, formData);
+      const response = await postData(`posts/modify/${id}`, formData);
       if (
         response?.status === 202 ||
         response?.status === 200 ||

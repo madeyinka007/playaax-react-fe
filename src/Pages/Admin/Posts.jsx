@@ -93,6 +93,15 @@ const Posts = () => {
   //     console.error("Error navigating to product details:", error);
   //   }
   // };
+
+  const editDetail = async (data) => {
+    try {
+      navigate(`/admin/posts/update/${data._id}`);
+    } catch (error) {
+      console.error("Error navigating to product details:", error);
+    }
+  };
+
   // const editCategoryData = (cat_id) => {
   //   dispatch(fetchCategory(cat_id));
   //   setEditCategory(true);
@@ -288,15 +297,15 @@ const Posts = () => {
 
                             <td>
                               <div className=" flex items-center gap-2">
-                                <div
+                                {/* <div
                                   className="cursor-pointer "
                                   // onClick={() => fetchSingleProduct(item?.id)}
                                 >
                                   <EyeIconBold />
-                                </div>
+                                </div> */}
                                 <div
                                   className="cursor-pointer "
-                                  // onClick={() => checkDetail(item)}
+                                  onClick={() => editDetail(item)}
                                 >
                                   <EditIcon />
                                 </div>
