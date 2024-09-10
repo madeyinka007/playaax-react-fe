@@ -17,7 +17,8 @@ import {
   fetchCategorys,
 } from "../../Redux/category/categoriesThunk";
 import { useState } from "react";
-import MediaUploader from "src/components/Form/Upload/uploaderv2";
+// import MediaUploader from "src/components/Form/Upload/uploaderv2";
+import Uploader from "src/components/Form/Upload/uploader";
 
 // eslint-disable-next-line react/prop-types
 const AddCategoryModal = ({ setOpenModal, categoryData }) => {
@@ -27,6 +28,9 @@ const AddCategoryModal = ({ setOpenModal, categoryData }) => {
 
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [files, setFiles] = useState("");
+
+  console.log("files uploader", files);
+
   const defaultFormValue = {
     description: "",
     name: "",
@@ -37,7 +41,7 @@ const AddCategoryModal = ({ setOpenModal, categoryData }) => {
       description: data?.description,
       label: data?.label,
       parentId: selectedCategory?._id,
-      icon: files?.original,
+      icon: files,
     };
 
     console.log("filtered data", filteredFormData);
@@ -99,11 +103,11 @@ const AddCategoryModal = ({ setOpenModal, categoryData }) => {
                       />
                     </div>
                     <div className="mb-6">
-                      <MediaUploader
+                      <Uploader
                         files={files}
                         setFiles={setFiles}
                         label="Upload Icon"
-                        className="max-w-[320px]"
+                        className="max-w-[320px] w-[200px] h-[200px]"
                       />
                     </div>
                   </div>

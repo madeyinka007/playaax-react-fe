@@ -3,9 +3,23 @@ import recordCardData from "../../data/transactionCard";
 import ColoredCard from "../Card/ColoredCard";
 import CreateCard from "../Card/CreateCard";
 import { categoryData } from "src/Pages/Home";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchCategorys } from "src/Redux/category/categoriesThunk";
 // import Skelton from "./Skelton";
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+  const { categories } = useSelector((state) => state.category);
+  console.log("all categories", categories);
+
+  const fetchCategorysHandler = () => {
+    dispatch(fetchCategorys());
+  };
+  useEffect(() => {
+    fetchCategorysHandler();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
   return (
     <div>
       <div className="p-4">
@@ -96,12 +110,12 @@ const Dashboard = () => {
           <div className="bg-white space-y-5 rounded-xl p-5 ">
             <article className="group">
               <div className="flex items-center gap-4 text-lg py-3 border-b mb-4 font-semibold uppercase text-gray-800">
-                <p>Top Categories</p>
+                <p>All Categories</p>
               </div>
 
               <div className="px-4">
-                <div className=" space-y-2 py-5">
-                  {categoryData?.map((catItem, categoryIndex) => (
+                <div className=" space-y-2.5 pt-2 pb-5">
+                  {categories?.map((catItem, categoryIndex) => (
                     <div
                       key={categoryIndex}
                       className=" flex items-center gap-3 text-gray-800 hover:text-primary-800 cursor-pointer text-base"
@@ -111,7 +125,7 @@ const Dashboard = () => {
                         alt="icon "
                         className="w-7 h-7"
                       />
-                      <p>{catItem?.name}</p>
+                      <p>{catItem?.label}</p>
                     </div>
                   ))}
                 </div>

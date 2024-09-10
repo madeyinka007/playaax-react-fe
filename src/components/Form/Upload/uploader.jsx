@@ -2,10 +2,10 @@ import { useDropzone } from "react-dropzone";
 import { Image } from "cloudinary-react";
 import { useState } from "react";
 
-import UploadIcon from "/assets/images/upload-icon.svg";
+import UploadIcon from "src/assets/images/upload-icon.svg";
 import { Label } from "../Label";
 import classNames from "classnames";
-import LoadingSpinner from "components/Loading/LoadingSpinner";
+import LoadingSpinner from "src/components/Loading/LoadingSpinner";
 
 function Uploader({ label, className, files, setFiles }) {
   const [loading, setLoading] = useState(false);
@@ -23,9 +23,9 @@ function Uploader({ label, className, files, setFiles }) {
       const imagefile = acceptedFiles[0];
       const data = new FormData();
       data.append("file", imagefile);
-      data.append("upload_preset", "exnzawv1");
+      data.append("upload_preset", "file-presets");
       const res = await fetch(
-        `https://api.cloudinary.com/v1_1/dhncmjnij/image/upload`,
+        `https://api.cloudinary.com/v1_1/djvikgzb8/image/upload`,
         { method: "POST", body: data }
       );
 
@@ -37,15 +37,14 @@ function Uploader({ label, className, files, setFiles }) {
     },
   });
 
-  const thumbs = <Image cloudName="dhncmjnij" publicId={files} />;
+  const thumbs = <Image cloudName="djvikgzb8" publicId={files} />;
 
   return (
     <div>
       <Label text={label} className="pb-2" />
       <div
         className={classNames(
-          "rounded-lg border border-solid border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-light-dark sm:p-4",
-          className
+          "rounded-lg border border-solid border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-light-dark sm:p-4"
         )}
       >
         <div
@@ -59,7 +58,7 @@ function Uploader({ label, className, files, setFiles }) {
           {loading ? (
             <LoadingSpinner />
           ) : files ? (
-            thumbs
+            <div className={classNames(className)}>{thumbs}</div>
           ) : (
             <div className="text-center flex flex-col items-center justify-center">
               <div className=" pb-2">

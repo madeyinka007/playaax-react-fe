@@ -4,8 +4,6 @@ import HookForm from "src/components/Form/Form";
 // import { Input } from "components/UI/Form/Input";
 import { Input } from "src/components/Form/Input";
 import { TextArea } from "src/components/Form/TextArea";
-// import CustomSelect from "src/components/Form/Select/CustomSelect";
-import MediaUploader from "src/components/Form/Upload/uploaderv2";
 
 import { useNavigate } from "react-router-dom";
 
@@ -16,6 +14,7 @@ import { useDispatch } from "react-redux";
 
 import { addNewAuthor, fetchAuthors } from "../../Redux/author/authorThunk";
 import { useState } from "react";
+import Uploader from "src/components/Form/Upload/uploader";
 
 // eslint-disable-next-line react/prop-types
 const AddAuthorModal = ({ setOpenModal }) => {
@@ -34,7 +33,7 @@ const AddAuthorModal = ({ setOpenModal }) => {
     const filteredFormData = {
       profile: data?.profile,
       name: data?.name,
-      image: files?.original,
+      image: files,
     };
 
     console.log("filtered data", filteredFormData);
@@ -86,7 +85,7 @@ const AddAuthorModal = ({ setOpenModal }) => {
                     />
                   </div>
                   <div className="mb-6">
-                    <MediaUploader
+                    <Uploader
                       files={files}
                       setFiles={setFiles}
                       label="Upload Profile Images"
