@@ -104,7 +104,14 @@ const ViewCategoryModal = ({ setOpenModal, categoryData, loading }) => {
                       {categoryData?.icon === null ? (
                         "No  Icon"
                       ) : (
-                        <p>{categoryData?.icon}</p>
+                        // <p>{categoryData?.icon}</p>
+                        <div className="w-16 h-16 rounded-md overflow-hidden bg-red-50">
+                          <img
+                            src={categoryData?.icon}
+                            alt=""
+                            className="w-full h-16 object-cover group-hover:scale-110 transition-all duration-300"
+                          />
+                        </div>
                       )}
                     </p>
                   </div>
