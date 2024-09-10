@@ -46,6 +46,8 @@ import DataTable from "../../components/Form/Table/DataTable";
 import ViewCategoryModal from "../../components/Modals/ViewCategoryModal";
 import { fetchAuthors } from "../../Redux/author/authorThunk";
 import AddAuthorModal from "../../components/Modals/AddAuthorModal";
+import EmptyState from "src/components/ui/EmptyState";
+import classNames from "classnames";
 
 const Authors = () => {
   const dispatch = useDispatch();
@@ -124,6 +126,8 @@ const Authors = () => {
     }
   };
 
+  console.log("first category", authors?.length);
+
   // const data = categories?.response;
 
   const tableHeader = {
@@ -155,7 +159,7 @@ const Authors = () => {
           </div>
         </div>
 
-        <div className="border border-gray-200 rounded-xl ">
+        <div className="relative border border-gray-200 rounded-xl ">
           <div className="flex items-center justify-between p-4 rounded-t-xl border-b bg-white">
             <div className="font-normal text-gray-600 text-xs">
               Showing 1 to {authors?.response?.length} of{" "}
@@ -188,7 +192,17 @@ const Authors = () => {
             </div>
           </div>
 
-          <>
+          <div
+            className={classNames(
+              "relative ",
+              {
+                "h-screen": authors?.length === 0,
+              },
+              {
+                "h-full": authors?.length !== 0,
+              }
+            )}
+          >
             {loading ? (
               <div className="min-h-[200px] flex items-center justify-center">
                 <LoadingSpinner />
@@ -201,104 +215,105 @@ const Authors = () => {
                 reload
               />
             ) : (
-              <div>
-                {/* {categories?.response?.map((cet, cetIndex) => (
-                    <p key={cetIndex}>{cet?.label}</p>
-                  ))} */}
-                <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                  <table className="w-full text-sm text-left rtl:text-right text-gray-600">
-                    <thead className="text-xs text-gray-700 bg-gray-50">
-                      <tr className="font-Inter">
-                        {tableHeader.tableHeadings.map(
-                          (heading, headingIndex) => (
-                            <th
-                              key={headingIndex}
-                              scope="col"
-                              className="px-6 py-4 whitespace-nowrap font-Inter uppercase"
+              <div className="  ">
+                <div className=" overflow-x-auto shadow-md sm:rounded-lg">
+                  {authors?.length === 0 ? (
+                    <EmptyState text="No Author Available" />
+                  ) : (
+                    <table className="w-full text-sm text-left rtl:text-right text-gray-600">
+                      <thead className="text-xs text-gray-700 bg-gray-50">
+                        <tr className="font-Inter">
+                          {tableHeader.tableHeadings.map(
+                            (heading, headingIndex) => (
+                              <th
+                                key={headingIndex}
+                                scope="col"
+                                className="px-6 py-4 whitespace-nowrap font-Inter uppercase"
+                              >
+                                {heading}
+                              </th>
+                            )
+                          )}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {authors?.map((item, rowIndex) => {
+                          return (
+                            <tr
+                              key={rowIndex}
+                              className="bg-white border-b text-gray-400  hover:bg-gray-50 [&_tr:last-child]:border-0 font-Inter"
                             >
-                              {heading}
-                            </th>
-                          )
-                        )}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {authors?.map((item, rowIndex) => {
-                        return (
-                          <tr
-                            key={rowIndex}
-                            className="bg-white border-b text-gray-400  hover:bg-gray-50 [&_tr:last-child]:border-0 font-Inter"
-                          >
-                            <th
-                              scope="row"
-                              className="px-6 py-5 font-medium whitespace-nowrap "
-                            >
-                              {rowIndex + 1}
-                            </th>
+                              <th
+                                scope="row"
+                                className="px-6 py-5 font-medium whitespace-nowrap "
+                              >
+                                {rowIndex + 1}
+                              </th>
 
-                            <td className="px-6 py-5 whitespace-nowrap text-gray-900 font-medium inline-flex items-center gap-2">
-                              {item?.name === null ? (
-                                "No  Name"
-                              ) : (
-                                <p>{item?.name}</p>
-                              )}
-                            </td>
-                            <td className="px-6 py-5  w-[400px]">
-                              {item?.profile}
-                            </td>
+                              <td className="px-6 py-5 whitespace-nowrap text-gray-900 font-medium inline-flex items-center gap-2">
+                                {item?.name === null ? (
+                                  "No  Name"
+                                ) : (
+                                  <p>{item?.name}</p>
+                                )}
+                              </td>
+                              <td className="px-6 py-5  w-[400px]">
+                                {item?.profile}
+                              </td>
 
-                            <td className="px-6 py-5 whitespace-nowrap">
-                              {item?.image === null ? (
-                                "No  Image"
-                              ) : (
-                                <p>{item?.image}</p>
-                              )}
-                            </td>
-                            <td className="px-6 py-5 whitespace-nowrap">
-                              {item?.status === true ? (
-                                <Badge
-                                  rounded
-                                  className="capitalize"
-                                  color="success"
-                                  text="Active"
-                                ></Badge>
-                              ) : (
-                                <Badge
-                                  rounded
-                                  className="capitalize"
-                                  color="error"
-                                  text="InActive"
-                                ></Badge>
-                              )}
-                            </td>
+                              <td className="px-6 py-5 whitespace-nowrap">
+                                {item?.image === null ? (
+                                  "No  Image"
+                                ) : (
+                                  <p>{item?.image}</p>
+                                )}
+                              </td>
+                              <td className="px-6 py-5 whitespace-nowrap">
+                                {item?.status === true ? (
+                                  <Badge
+                                    rounded
+                                    className="capitalize"
+                                    color="success"
+                                    text="Active"
+                                  ></Badge>
+                                ) : (
+                                  <Badge
+                                    rounded
+                                    className="capitalize"
+                                    color="error"
+                                    text="InActive"
+                                  ></Badge>
+                                )}
+                              </td>
 
-                            <td className="px-6 py-5 ">
-                              <div className=" flex items-center gap-2">
-                                <div
-                                  className="cursor-pointer "
-                                  // onClick={() => fetchSingleCategory(item?._id)}
-                                >
-                                  <EyeIconBold />
+                              <td className="px-6 py-5 ">
+                                <div className=" flex items-center gap-2">
+                                  <div
+                                    className="cursor-pointer "
+                                    // onClick={() => fetchSingleCategory(item?._id)}
+                                  >
+                                    <EyeIconBold />
+                                  </div>
+                                  <div
+                                    className="cursor-pointer "
+                                    // onClick={() => checkDetail(item)}
+                                  >
+                                    <EditIcon />
+                                  </div>
+                                  <div
+                                    className="cursor-pointer pl-2"
+                                    // onClick={() => deleteProductHandler(item?.id)}
+                                  >
+                                    <DeleteIcon className="text-red-600 w-6 h-6 " />
+                                  </div>
                                 </div>
-                                <div
-                                  className="cursor-pointer "
-                                  // onClick={() => checkDetail(item)}
-                                >
-                                  <EditIcon />
-                                </div>
-                                <div
-                                  className="cursor-pointer pl-2"
-                                  // onClick={() => deleteProductHandler(item?.id)}
-                                >
-                                  <DeleteIcon className="text-red-600 w-6 h-6 " />
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  )}
                 </div>
               </div>
             )}
@@ -311,10 +326,9 @@ const Authors = () => {
             />
           )}
         </div> */}
-          </>
+          </div>
         </div>
         <div className="flex items-center justify-between py-10">
-          {/* Previous Button */}
           <a
             href="/authors"
             className="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
