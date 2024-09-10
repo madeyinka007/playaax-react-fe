@@ -44,6 +44,8 @@ import {
 
 import DataTable from "../../components/Form/Table/DataTable";
 import ViewCategoryModal from "../../components/Modals/ViewCategoryModal";
+import EmptyState from "src/components/ui/EmptyState";
+import classNames from "classnames";
 
 const Categories = () => {
   const dispatch = useDispatch();
@@ -51,6 +53,7 @@ const Categories = () => {
 
   const [openCreateCategory, setOpenCreateCategory] = useState(false);
   const [viewCategory, setViewCategory] = useState(false);
+  const [editCategory, setEditCategory] = useState(false);
   const [deleteCategoryData, setDeleteCategoryData] = useState(false);
 
   // const [posts, setPosts] = useState([]);
@@ -74,7 +77,7 @@ const Categories = () => {
   console.log("categories podt", categories);
 
   const fetchCategorysHandler = () => {
-    dispatch(fetchCategorys("posts/category/pull?del_flag=0"));
+    dispatch(fetchCategorys());
   };
   useEffect(() => {
     fetchCategorysHandler();
@@ -94,10 +97,11 @@ const Categories = () => {
   //     console.error("Error navigating to product details:", error);
   //   }
   // };
-  // const editCategoryData = (cat_id) => {
-  //   dispatch(fetchCategory(cat_id));
-  //   setEditCategory(true);
-  // };
+
+  const editCategoryData = (cat_id) => {
+    dispatch(fetchCategory(cat_id));
+    setEditCategory(true);
+  };
 
   const deleteCategoryHandler = (cat_id) => {
     dispatch(fetchCategory(cat_id));
@@ -195,7 +199,17 @@ const Categories = () => {
             </div>
           </div>
 
-          <>
+          <div
+            className={classNames(
+              "relative ",
+              {
+                "h-screen": categories?.length === 0,
+              },
+              {
+                "h-full": categories?.length !== 0,
+              }
+            )}
+          >
             {loading ? (
               <div className="min-h-[200px] flex items-center justify-center">
                 <LoadingSpinner />
@@ -213,108 +227,121 @@ const Categories = () => {
                     <p key={cetIndex}>{cet?.label}</p>
                   ))} */}
                 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                  <table className="w-full text-sm text-left rtl:text-right text-gray-600">
-                    <thead className="text-xs text-gray-700 bg-gray-50">
-                      <tr className="font-Inter">
-                        {tableHeader.tableHeadings.map(
-                          (heading, headingIndex) => (
-                            <th
-                              key={headingIndex}
-                              scope="col"
-                              className="px-6 py-4 whitespace-nowrap font-Inter uppercase"
+                  {categories?.length === 0 ? (
+                    <EmptyState text="No Category Available" />
+                  ) : (
+                    <table className="w-full text-sm text-left rtl:text-right text-gray-600">
+                      <thead className="text-xs text-gray-700 bg-gray-50">
+                        <tr className="font-Inter">
+                          {tableHeader.tableHeadings.map(
+                            (heading, headingIndex) => (
+                              <th
+                                key={headingIndex}
+                                scope="col"
+                                className="px-6 py-4 whitespace-nowrap font-Inter uppercase"
+                              >
+                                {heading}
+                              </th>
+                            )
+                          )}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {categories?.map((item, rowIndex) => {
+                          return (
+                            <tr
+                              key={rowIndex}
+                              className="bg-white border-b text-gray-400  hover:bg-gray-50 [&_tr:last-child]:border-0 font-Inter"
                             >
-                              {heading}
-                            </th>
-                          )
-                        )}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {categories?.map((item, rowIndex) => {
-                        return (
-                          <tr
-                            key={rowIndex}
-                            className="bg-white border-b text-gray-400  hover:bg-gray-50 [&_tr:last-child]:border-0 font-Inter"
-                          >
-                            <th
-                              scope="row"
-                              className="px-6 py-5 font-medium whitespace-nowrap "
-                            >
-                              {rowIndex + 1}
-                            </th>
-                            {/* <td className="px-6 py-5 whitespace-nowrap">
+                              <th
+                                scope="row"
+                                className="px-6 py-5 font-medium whitespace-nowrap "
+                              >
+                                {rowIndex + 1}
+                              </th>
+                              {/* <td className="px-6 py-5 whitespace-nowrap">
                               {item?.shipping_id}
                             </td> */}
-                            <td className="px-6 py-5 whitespace-nowrap text-gray-900 font-medium inline-flex items-center gap-2">
-                              {/* {item?.label} */}
-                              {item?.label === null ? (
-                                "No  Name"
-                              ) : (
-                                <p>{item?.label}</p>
-                              )}
-                            </td>
-                            <td className="px-6 py-5 w-[400px]">
-                              {item?.description}
-                            </td>
-                            <td className="px-6 py-5 whitespace-nowrap">
-                              {item?.parent === null ? (
-                                "No  parent category"
-                              ) : (
-                                <p>{item?.parent?.label}</p>
-                              )}
-                            </td>
-                            <td className="px-6 py-5 whitespace-nowrap">
-                              {item?.icon === null ? (
-                                "No  Icon"
-                              ) : (
-                                <p>{item?.icon}</p>
-                              )}
-                            </td>
-                            <td className="px-6 py-5 whitespace-nowrap">
-                              {item?.status === true ? (
-                                <Badge
-                                  rounded
-                                  className="capitalize"
-                                  color="success"
-                                  text="Active"
-                                ></Badge>
-                              ) : (
-                                <Badge
-                                  rounded
-                                  className="capitalize"
-                                  color="error"
-                                  text="InActive"
-                                ></Badge>
-                              )}
-                            </td>
+                              <td className="px-6 py-5 whitespace-nowrap text-gray-900 font-medium inline-flex items-center gap-2">
+                                {/* {item?.label} */}
+                                {item?.label === null ? (
+                                  "No  Name"
+                                ) : (
+                                  <p>{item?.label}</p>
+                                )}
+                              </td>
+                              <td className="px-6 py-5 w-[400px]">
+                                {item?.description}
+                              </td>
+                              <td className="px-6 py-5 whitespace-nowrap">
+                                {item?.parent === null ? (
+                                  "No  parent category"
+                                ) : (
+                                  <p>{item?.parent?.label}</p>
+                                )}
+                              </td>
+                              <td className="px-6 py-5 whitespace-nowrap">
+                                {item?.icon === null ? (
+                                  "No  Icon"
+                                ) : (
+                                  // <p>{item?.icon}</p>
+                                  <div className="w-10 h-10 rounded-md overflow-hidden bg-red-50">
+                                    <img
+                                      src={item?.icon}
+                                      alt=""
+                                      className="w-full h-10 object-cover group-hover:scale-110 transition-all duration-300"
+                                    />
+                                  </div>
+                                )}
+                              </td>
+                              <td className="px-6 py-5 whitespace-nowrap">
+                                {item?.status === true ? (
+                                  <Badge
+                                    rounded
+                                    className="capitalize"
+                                    color="success"
+                                    text="Active"
+                                  ></Badge>
+                                ) : (
+                                  <Badge
+                                    rounded
+                                    className="capitalize"
+                                    color="error"
+                                    text="InActive"
+                                  ></Badge>
+                                )}
+                              </td>
 
-                            <td className="px-6 py-5 ">
-                              <div className=" flex items-center gap-2">
-                                <div
-                                  className="cursor-pointer "
-                                  onClick={() => fetchSingleCategory(item?._id)}
-                                >
-                                  <EyeIconBold />
+                              <td className="px-6 py-5 ">
+                                <div className=" flex items-center gap-2">
+                                  <div
+                                    className="cursor-pointer "
+                                    onClick={() =>
+                                      fetchSingleCategory(item?._id)
+                                    }
+                                  >
+                                    <EyeIconBold />
+                                  </div>
+                                  <div
+                                    className="cursor-pointer "
+                                    onClick={() => editCategoryData(item?._id)}
+                                  >
+                                    <EditIcon />
+                                  </div>
+                                  <div
+                                    className="cursor-pointer pl-2"
+                                    // onClick={() => deleteProductHandler(item?.id)}
+                                  >
+                                    <DeleteIcon className="text-red-600 w-6 h-6 " />
+                                  </div>
                                 </div>
-                                <div
-                                  className="cursor-pointer "
-                                  // onClick={() => checkDetail(item)}
-                                >
-                                  <EditIcon />
-                                </div>
-                                <div
-                                  className="cursor-pointer pl-2"
-                                  // onClick={() => deleteProductHandler(item?.id)}
-                                >
-                                  <DeleteIcon className="text-red-600 w-6 h-6 " />
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  )}
                 </div>
               </div>
             )}
@@ -327,7 +354,7 @@ const Categories = () => {
             />
           )}
         </div> */}
-          </>
+          </div>
         </div>
         <div className="flex items-center justify-between py-10">
           {/* Previous Button */}
@@ -437,25 +464,25 @@ const Categories = () => {
           loading={loading}
         />
       )}
-      {/* <div>
+      <div>
         {editCategory && (
           <div>
             {loading ? (
               <div className="min-h-[400px] flex items-center justify-center">
-             
                 ...
               </div>
             ) : (
               <EditCategoryModal
                 setOpenModal={setEditCategory}
-                categoryData={category?.data}
+                catData={category?.response}
+                categories={categories}
                 loading={loading}
               />
             )}
           </div>
         )}
       </div>
-
+      {/*
       {deleteCategoryData && (
         <>
           <Notification
