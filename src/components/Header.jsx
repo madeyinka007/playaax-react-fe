@@ -13,7 +13,7 @@ function Menu({ children, open }) {
   return (
     <div
       className={classNames(
-        "fixed top-0 z-50 backdrop-blur h-full max-h-screen overflow-y-auto text-white bg-defaultBg transition-all duration-700 ",
+        "fixed top-0 z-50 backdrop-blur h-full max-h-screen overflow-y-auto text-white bg-gray-900 transition-all duration-700 ",
         { "w-full": open },
         { "w-0": !open }
       )}
@@ -154,11 +154,11 @@ export const Header = () => {
                 </ul>
               </nav>
             </MenuContainer>
-            <div className="text-center flex mt-10 items-center justify-center">
+            {/* <div className="text-center flex mt-10 items-center justify-center">
               <a href="">
                 <Button>Let&apos;s work together</Button>
               </a>
-            </div>
+            </div> */}
             <div className="my-14 w-full lg:hidden">
               <h6 className="text-center font-bold">Follow on Social Media</h6>
               <hr className="bg-gray-200 my-5 h-px border-0" />
