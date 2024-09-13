@@ -2,7 +2,8 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 // Define base URL
-const baseURL = "/api/";
+//const baseURL = 'http://localhost:3000/api/'
+const baseURL = "https://bi08fsi8i7.execute-api.us-east-1.amazonaws.com/api/";
 // Create an Axios instance with default configurations
 const axiosInstance = axios.create({
   baseURL,
@@ -52,7 +53,20 @@ export const getData = async (url, params) => {
 };
 
 // Utility function for POST requests
-export const postData = (url, data) =>  Axios.post(url, data)
+export const postData = async (url, data) => {
+  try {
+    const response = await fetch(baseURL+url, {
+      method:'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body:JSON.stringify(data)
+    })
+    return response.json()
+  } catch(error) {
+    throw error;
+  }
+}
 // export const postData = async (url, data) => {
 //   try {
 //     const response = await axiosInstance.post(url, data);
