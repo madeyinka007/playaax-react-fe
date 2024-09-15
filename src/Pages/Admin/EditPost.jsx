@@ -17,12 +17,7 @@ import { fetchAuthors } from "../../Redux/author/authorThunk";
 import { fetchCategorys } from "../../Redux/category/categoriesThunk";
 import { Label } from "../../components/Form/Label";
 import TextEditor from "../../components/Form/TextEditor";
-import {
-  addNewPost,
-  fetchPost,
-  fetchPosts,
-  updatePost,
-} from "../../Redux/posts/postsThunk";
+import { fetchPost, updatePost } from "../../Redux/posts/postsThunk";
 import { ArrowLeft } from "lucide-react";
 
 import MediaUploader from "../../components/Form/Upload/uploaderv2";
@@ -43,8 +38,8 @@ const EditPost = () => {
   const dispatch = useDispatch();
 
   const { _id } = useParams(); // Type assertion for _id
-  const { posts, post, loading, error } = useSelector((state) => state.posts);
-  console.log("single posts", post);
+  const { post, loading, error } = useSelector((state) => state.posts);
+  // console.log("single posts", post);
   const postData = post?.response;
 
   // console.log("postData gotten", postData);
@@ -71,7 +66,7 @@ const EditPost = () => {
   const { categories } = useSelector((state) => state.category);
   const { authors } = useSelector((state) => state.author);
 
-  console.log("files Upload now", files);
+  // console.log("files Upload now", files);
 
   const fetchCategorysHandler = () => {
     dispatch(fetchCategorys("posts/category/pull?del_flag=0"));
