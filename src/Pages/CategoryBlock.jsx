@@ -2,8 +2,7 @@
 import { useEffect, useState } from "react";
 import { BoldArrowIcon, ClockIcon, HeadingsIcon } from "../assets/SvgsIcons";
 import { Button } from "../components/Form/Button";
-import Header from "../components/Header";
-import Headlines from "../components/Headlines";
+
 // import HeroSlider from "../components/HeroSlider";
 import Ads1 from "src/assets/images/T&C.png";
 import HookForm from "src/components/Form/Form";
@@ -47,6 +46,7 @@ import { Link, useParams } from "react-router-dom";
 import { fetchCategorys } from "src/Redux/category/categoriesThunk";
 import DefaultBadge from "src/components/Form/DefaultBadge";
 import CategoryItem from "src/components/ui/CategoryItem";
+import classNames from "classnames";
 
 export const categoryData = [
   { name: "Premier League", icon: Premier },
@@ -82,7 +82,7 @@ const CategoryBlock = () => {
   const { posts, postCategory, loading } = useSelector((state) => state.posts);
 
   // console.log("slug gotten", slug);
-  console.log("category post", postCategory);
+  // console.log("category post here", postCategory);
 
   // const postData = post?.response;
 
@@ -106,10 +106,10 @@ const CategoryBlock = () => {
   ];
   const [selectedAirtime, setSelectedAirtime] = useState(airtimeData[0]);
 
-  // console.log("all posts", posts);
+  // console.log("all postCategory", postCategory);
 
   const { categories } = useSelector((state) => state.category);
-  console.log("all categories", categories);
+  // console.log("all categories", categories);
 
   const fetchCategorysHandler = () => {
     dispatch(fetchCategorys());
@@ -128,7 +128,7 @@ const CategoryBlock = () => {
   const randomIndex = Math.floor(Math.random() * posts.length);
   const randomPost = posts[randomIndex];
 
-  console.log("randomPost", randomPost);
+  // console.log("randomPost", randomPost);
 
   const fetchPostsHandler = () => {
     dispatch(fetchPosts());
@@ -156,12 +156,16 @@ const CategoryBlock = () => {
     // navigate("/product/inventory/");
     // setOpenModal(false);
   };
+
+  const [loadMore, setLoadMore] = useState(2);
+
+  const toggleMore = () => setLoadMore(loadMore + 2);
   return (
     <>
-      <Header />
+      {/* <Header />
       <div className="pt-[76px]">
         <Headlines />
-      </div>
+      </div> */}
       <div className="px-4 bg-gray-100">
         <img
           src="/imgs/ads-banner-1.png"
@@ -439,43 +443,81 @@ const CategoryBlock = () => {
               <LoadingSpinner />
             ) : (
               <div>
-                {postCategory?.map((cata, catagoryIndex) => (
-                  <div
-                    key={catagoryIndex}
-                    className="px-4 lg:p-6 py-5 bg-white rounded-xl group mb-6"
-                  >
-                    <Link
-                      to={`/posts/${cata?._id}`}
-                      className="flex flex-col lg:flex-row gap-2 sm:gap-[25px] items-center  "
+                {postCategory
+                  ?.slice(0, loadMore)
+                  ?.map((cata, catagoryIndex) => (
+                    <div
+                      key={catagoryIndex}
+                      className="px-4 lg:p-6 py-5 bg-white rounded-xl group mb-6"
                     >
-                      <div className="w-full h-60 mb-4 lg:mb-0 lg:w-60 lg:h-60 rounded-md overflow-hidden bg-red-100">
-                        <img
-                          src={cata?.image}
-                          alt=""
-                          className="w-full h-60 object-cover group-hover:scale-110 transition-all duration-300"
-                        />
-                      </div>
-                      <div className="flex-1 space-y-1">
-                        <DefaultBadge
-                          className="text-gray-600 bg-gray-50"
-                          text={cata?.category?.label}
-                        />
-
-                        <p className="text-gray-800 font-semibold mt-1.5 pb-2 text-2xl transition-all duration-300 line-clamp-2 group-hover:underline">
-                          {cata?.title}
-                        </p>
-                        <p className=" text-gray-600 line-clamp-3">
-                          {cata?.short_content}
-                        </p>
-                        <div className=" flex items-center gap-2 text-sm pb-4 text-gray-600">
-                          <ClockIcon className="w-4 h-4" />
-
-                          <p className="py-2">{cata?.createdAt}</p>
+                      <Link
+                        to={`/posts/${cata?._id}`}
+                        className="flex flex-col lg:flex-row gap-2 sm:gap-[25px] items-center  "
+                      >
+                        <div className="w-full h-60 mb-4 lg:mb-0 lg:w-60 lg:h-60 rounded-md overflow-hidden bg-red-100">
+                          <img
+                            src={cata?.image}
+                            alt=""
+                            className="w-full h-60 object-cover group-hover:scale-110 transition-all duration-300"
+                          />
                         </div>
+                        <div className="flex-1 space-y-1">
+                          <DefaultBadge
+                            className="text-gray-600 bg-gray-50"
+                            text={cata?.category?.label}
+                          />
+
+                          <p className="text-gray-800 font-semibold mt-1.5 pb-2 text-2xl transition-all duration-300 line-clamp-2 group-hover:underline">
+                            {cata?.title}
+                          </p>
+                          <p className=" text-gray-600 line-clamp-3">
+                            {cata?.short_content}
+                          </p>
+                          <div className=" flex items-center gap-2 text-sm pb-4 text-gray-600">
+                            <ClockIcon className="w-4 h-4" />
+
+                            <p className="py-2">{cata?.createdAt}</p>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  ))}
+
+                <div
+                  className={classNames(
+                    "w-full flex items-center justify-center pb-4",
+                    { hidden: loadMore >= postCategory?.length }
+                  )}
+                >
+                  <Button
+                    onClick={() => toggleMore()}
+                    leftIcon={
+                      <div role="status">
+                        <svg
+                          aria-hidden="true"
+                          className="inline w-5 h-5 text-gray-200 animate-spin dark:text-gray-600 fill-primary-800"
+                          viewBox="0 0 100 101"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                            fill="currentColor"
+                          />
+                          <path
+                            d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                            fill="currentFill"
+                          />
+                        </svg>
+                        <span className="sr-only">Loading...</span>
                       </div>
-                    </Link>
-                  </div>
-                ))}
+                    }
+                    size="lg"
+                    rounded
+                  >
+                    Show me More
+                  </Button>
+                </div>
               </div>
             )}
           </div>
