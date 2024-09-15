@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
-import Banner1 from "src/assets/images/slider-1.png";
-import Banner2 from "src/assets/images/slider-2.png";
-import Banner3 from "src/assets/images/slider-3.png";
-import Banner4 from "src/assets/images/slider-4.png";
+// import Banner1 from "src/assets/images/slider-1.png";
+// import Banner2 from "src/assets/images/slider-2.png";
+// import Banner3 from "src/assets/images/slider-3.png";
+// import Banner4 from "src/assets/images/slider-4.png";
 
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,36 +11,36 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Button } from "./Form/Button";
 import DefaultBadge from "./Form/DefaultBadge";
 
-const sliderData = [
-  {
-    title: "Trent Alexander-Arnold signs a new contract",
-    image: Banner1,
-    description:
-      "Mohamed Salah and Virgil van Dijk remain key - but ensuring Trent Alexander-Arnold signs a new contract must be Liverpool's top priority",
-    category: "Premier League",
-  },
-  {
-    title: "Chelsea finally reach agreement with Napoli ",
-    image: Banner2,
-    description:
-      "Transfer news & rumours LIVE: Chelsea finally reach agreement with Napoli over £30m deal for Romelu Lukakumelu",
-    category: "Transfer News",
-  },
-  {
-    title: "Team-mate convinced him to leave Chelsea",
-    image: Banner3,
-    description:
-      "Conor Gallagher claimed he loves being at Atletico Madrid while revealing which English player convinced him to leave Chelsea.",
-    category: "Premier League",
-  },
-  {
-    title: "Napoli table €25m bid for McTominay ",
-    image: Banner4,
-    description:
-      "Napoli test Man Utd's resolve by tabling €25m offer for Scott McTominay - but Red Devils holding out for more",
-    category: "Manchester United",
-  },
-];
+// const sliderData = [
+//   {
+//     title: "Trent Alexander-Arnold signs a new contract",
+//     image: Banner1,
+//     description:
+//       "Mohamed Salah and Virgil van Dijk remain key - but ensuring Trent Alexander-Arnold signs a new contract must be Liverpool's top priority",
+//     category: "Premier League",
+//   },
+//   {
+//     title: "Chelsea finally reach agreement with Napoli ",
+//     image: Banner2,
+//     description:
+//       "Transfer news & rumours LIVE: Chelsea finally reach agreement with Napoli over £30m deal for Romelu Lukakumelu",
+//     category: "Transfer News",
+//   },
+//   {
+//     title: "Team-mate convinced him to leave Chelsea",
+//     image: Banner3,
+//     description:
+//       "Conor Gallagher claimed he loves being at Atletico Madrid while revealing which English player convinced him to leave Chelsea.",
+//     category: "Premier League",
+//   },
+//   {
+//     title: "Napoli table €25m bid for McTominay ",
+//     image: Banner4,
+//     description:
+//       "Napoli test Man Utd's resolve by tabling €25m offer for Scott McTominay - but Red Devils holding out for more",
+//     category: "Manchester United",
+//   },
+// ];
 const swiperOptions = {
   modules: [Autoplay, Pagination, Navigation],
   slidesPerView: 1,
@@ -62,10 +62,10 @@ const swiperOptions = {
   },
 };
 const HeroSlider = ({ sliderdata }) => {
-  console.log(
-    "firstSlider",
-    sliderdata?.filter((post) => post?.feature === "slider")
-  );
+  // console.log(
+  //   "firstSlider",
+  //   sliderdata?.filter((post) => post?.feature === "slider")
+  // );
   const sliderPosts = sliderdata?.filter((post) => post?.feature === "slider");
   return (
     <div className=" ">
