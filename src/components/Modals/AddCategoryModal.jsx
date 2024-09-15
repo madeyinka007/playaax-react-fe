@@ -29,7 +29,7 @@ const AddCategoryModal = ({ setOpenModal, categoryData }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [files, setFiles] = useState("");
 
-  console.log("files uploader", files);
+  // console.log("files uploader", files);
 
   const defaultFormValue = {
     description: "",
@@ -44,7 +44,7 @@ const AddCategoryModal = ({ setOpenModal, categoryData }) => {
       icon: files,
     };
 
-    console.log("filtered data", filteredFormData);
+    // console.log("filtered data", filteredFormData);
     dispatch(addNewCategory(filteredFormData));
     // alert(JSON.stringify(filteredFormData));
 
