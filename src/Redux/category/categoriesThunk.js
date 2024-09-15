@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
-import { getData, postData, putData, removeData } from "../../utils/api";
+import { getData, postData } from "../../utils/api";
 // import { openToast } from "../Toast/toastSlice";
 
-const CATEGORY_URL = "admin/category";
+// const CATEGORY_URL = "admin/category";
 
 const fetchCategorys = createAsyncThunk(
   "admin/fetchCategory",
@@ -96,15 +96,9 @@ const deleteCategory = createAsyncThunk(
   async (id, { rejectWithValue, dispatch }) => {
     try {
       // console.log(id);
-      const response = await removeData(`${CATEGORY_URL}/${id}`);
-      if (
-        response?.status === 202 ||
-        response?.status === 200 ||
-        response?.status === 201 ||
-        response?.status_code === 202 ||
-        response?.status_code === 200 ||
-        response?.status_code === 201
-      ) {
+      const response = await getData(`posts/category/delete/${id}`);
+      // console.log("delete category", response);
+      if (response?.message === "success") {
         dispatch(fetchCategorys());
         toast.success("Category deleted successfully!");
         // dispatch(
