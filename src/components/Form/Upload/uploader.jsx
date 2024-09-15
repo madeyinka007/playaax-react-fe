@@ -30,7 +30,7 @@ function Uploader({ label, className, files, setFiles }) {
       );
 
       const uploadedFile = await res.json();
-      console.log("image upload", uploadedFile);
+      // console.log("image upload", uploadedFile);
 
       setFiles(uploadedFile.secure_url);
       setLoading(false);
