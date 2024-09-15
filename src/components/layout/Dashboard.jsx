@@ -6,12 +6,25 @@ import CreateCard from "../Card/CreateCard";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchCategorys } from "src/Redux/category/categoriesThunk";
+import { fetchPosts } from "src/Redux/posts/postsThunk";
+import { formatDateTime } from "src/utils/constant";
 // import Skelton from "./Skelton";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.category);
-  console.log("all categories", categories);
+  // console.log("all categories", categories);
+  const { posts } = useSelector((state) => state.posts);
+
+  const lastPost = posts[posts.length - 1];
+  const lastTenPost = posts?.slice(-11, -1);
+  const fetchPostsHandler = () => {
+    dispatch(fetchPosts());
+  };
+  useEffect(() => {
+    fetchPostsHandler();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
   const fetchCategorysHandler = () => {
     dispatch(fetchCategorys());
@@ -24,7 +37,7 @@ const Dashboard = () => {
     <div>
       <div className="p-4">
         <h1 className="text-2xl font-semibold text-gray-800 dark:text-white">
-          Good afternoom, Charlie
+          Good afternoom, Admin
         </h1>
         <h2 className="text-gray-600 text-sm">
           Here&apos;s what&apos;s happening with your ambassador account today.
@@ -58,28 +71,38 @@ const Dashboard = () => {
               </div>
 
               <div className="p-4">
-                <a href="#">
+                <div>
                   <h3 className="text-lg font-medium text-gray-800 hover:text-primary-800 cursor-pointer">
-                    Bayern & Kane face uphill battle to dethrone Leverkusen
+                    {lastPost?.title}
                   </h3>
-                </a>
-                <div className=" flex items-center gap-2 text-sm pb-4 text-gray-600">
-                  <ClockIcon className="w-4 h-4" />
-                  <p className="py-2">20 Aug 2024, 03:55 AM</p>
-                </div>
-                <hr />
-                <div className=" space-y-3 py-5">
-                  <div className=" flex items-center gap-3 text-gray-600 text-sm hover:text-primary-800 cursor-pointer">
-                    <BoldArrowIcon className="w-2.5 h-2.5" />
-                    <p>Fulham sign Palhinha from Sporting Lisbon</p>
+
+                  <div className=" flex items-center gap-2 text-sm pb-4 text-gray-600">
+                    <ClockIcon className="w-4 h-4" />
+                    <p className="py-2">
+                      {formatDateTime(lastPost?.createdAt)}
+                    </p>
                   </div>
-                  <div className=" flex items-center gap-3 text-gray-600 text-sm hover:text-primary-800 cursor-pointer">
+
+                  <hr />
+                </div>
+
+                <div className=" space-y-3 py-5">
+                  {lastTenPost?.map((postItem, postIndex) => (
+                    <div
+                      key={postIndex}
+                      className=" flex items-center gap-3 text-gray-600 text-sm hover:text-primary-800 cursor-pointer"
+                    >
+                      <BoldArrowIcon className="w-2.5 h-2.5" />
+                      <p>{postItem?.title}</p>
+                    </div>
+                  ))}
+                  {/* <div className=" flex items-center gap-3 text-gray-600 text-sm hover:text-primary-800 cursor-pointer">
                     <BoldArrowIcon className="w-2.5 h-2.5" />
                     <p>
                       Meet the stand-out NWSL teenager tipped for a USWNT debut
                     </p>
-                  </div>
-                  <div className=" flex items-center gap-3 text-gray-600 text-sm hover:text-primary-800 cursor-pointer">
+                  </div> */}
+                  {/* <div className=" flex items-center gap-3 text-gray-600 text-sm hover:text-primary-800 cursor-pointer">
                     <BoldArrowIcon className="w-2.5 h-2.5" />
                     <p>
                       Liverpool preparing blockbuster offer for Everton &apos;s
@@ -92,16 +115,16 @@ const Dashboard = () => {
                       Gundogan is back! Man City confirm midfielder&apos;s
                       return
                     </p>
-                  </div>
+                  </div> */}
                 </div>
-                <p className="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
+                {/* <p className="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                   Recusandae dolores, possimus pariatur animi temporibus
                   nesciunt praesentium dolore sed nulla ipsum eveniet corporis
                   quidem, mollitia itaque minus soluta, voluptates neque
                   explicabo tempora nisi culpa eius atque dignissimos. Molestias
                   explicabo corporis voluptatem?
-                </p>
+                </p> */}
               </div>
             </article>
           </div>
