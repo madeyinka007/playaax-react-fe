@@ -45,7 +45,7 @@ const CreatePost = () => {
   const { categories } = useSelector((state) => state.category);
   const { authors } = useSelector((state) => state.author);
 
-  console.log("files Upload now", files);
+  // console.log("files Upload now", files);
 
   const fetchCategorysHandler = () => {
     dispatch(fetchCategorys("posts/category/pull?del_flag=0"));
