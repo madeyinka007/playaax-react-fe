@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-unused-vars */
 // import { Link } from "react-router-dom";
 
@@ -74,7 +75,7 @@ const Categories = () => {
   const { categories, category, loading, error } = useSelector(
     (state) => state.category
   );
-  console.log("categories podt", categories);
+  // console.log("categories podt", categories);
 
   const fetchCategorysHandler = () => {
     dispatch(fetchCategorys());
@@ -114,8 +115,8 @@ const Categories = () => {
       // Handle delete category logic here
       try {
         // setLoading(true);
-        dispatch(deleteCategory(category?.id));
-        navigate("/admin/product/categories");
+        dispatch(deleteCategory(category?._id));
+        navigate("/admin/category");
       } catch (error) {
         console.log(error);
 
@@ -330,7 +331,9 @@ const Categories = () => {
                                   </div>
                                   <div
                                     className="cursor-pointer pl-2"
-                                    // onClick={() => deleteProductHandler(item?.id)}
+                                    onClick={() =>
+                                      deleteCategoryHandler(item?._id)
+                                    }
                                   >
                                     <DeleteIcon className="text-red-600 w-6 h-6 " />
                                   </div>
@@ -482,7 +485,7 @@ const Categories = () => {
           </div>
         )}
       </div>
-      {/*
+
       {deleteCategoryData && (
         <>
           <Notification
@@ -490,12 +493,12 @@ const Categories = () => {
             type="warning"
             onCancel={() => setDeleteCategoryData(false)}
             onApprove={() => {
-              handleDelete(category?.data);
+              handleDelete(category?.response);
               setDeleteCategoryData(false);
             }}
           />
         </>
-      )} */}
+      )}
     </>
   );
 };
