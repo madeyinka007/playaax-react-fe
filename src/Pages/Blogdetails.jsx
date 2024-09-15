@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import Headlines from "src/components/Headlines";
-import Header from "src/components/Header";
+// import Headlines from "src/components/Headlines";
+// import Header from "src/components/Header";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { fetchPost, fetchPosts } from "src/Redux/posts/postsThunk";
 import LoadingSpinner from "src/components/Loading/LoadingSpinner";
 import ErrorStatus from "src/components/ui/ErrorStatus";
-import { DiscussionEmbed } from "disqus-react";
+// import { DiscussionEmbed } from "disqus-react";
 import { formatDateOnly } from "src/utils/constant";
 import addside from "../assets/images/ads-sidebar.png";
 import CategoryItem from "src/components/ui/CategoryItem";
@@ -58,10 +58,10 @@ const Blogdetails = () => {
   }, [dispatch]);
   return (
     <div>
-      <Header />
+      {/* <Header />
       <div className="pt-[68px]">
         <Headlines />
-      </div>
+      </div> */}
       <div className="bg-gray-100 px-4">
         <section className="py-16 md:py-[100px]">
           <div className="container w-full mx-auto grid grid-cols-8 text-gray-600 lg:grid-cols-12 gap-y-16 lg:gap-y-0 lg:gap-x-[70px]">
