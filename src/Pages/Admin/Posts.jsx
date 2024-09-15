@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-unused-vars */
 // import { Link } from "react-router-dom";
 
@@ -17,11 +18,7 @@ import { useEffect, useState } from "react";
 import ErrorStatus from "src/components/ui/ErrorStatus";
 import LoadingSpinner from "src/components/Loading/LoadingSpinner";
 import { formatDate } from "src/utils/constant";
-import {
-  fetchCategory,
-  fetchCategorys,
-  deleteCategory,
-} from "../../Redux/category/categoriesThunk";
+import { fetchCategory } from "../../Redux/category/categoriesThunk";
 import AddCategoryModal from "../../components/Modals/AddCategoryModal";
 import EditCategoryModal from "../../components/Modals/EditCategoryModal";
 import Notification from "../../components/Form/Notification";
@@ -44,7 +41,11 @@ import {
 
 import DataTable from "../../components/Form/Table/DataTable";
 import ViewCategoryModal from "../../components/Modals/ViewCategoryModal";
-import { fetchPosts } from "../../Redux/posts/postsThunk";
+import {
+  deletePost,
+  fetchPost,
+  fetchPosts,
+} from "../../Redux/posts/postsThunk";
 
 const Posts = () => {
   const dispatch = useDispatch();
@@ -52,7 +53,7 @@ const Posts = () => {
 
   const [openCreateCategory, setOpenCreateCategory] = useState(false);
   const [viewCategory, setViewCategory] = useState(false);
-  const [deleteCategoryData, setDeleteCategoryData] = useState(false);
+  const [deletePostData, setDeletePostData] = useState(false);
 
   // const [posts, setPosts] = useState([]);
 
@@ -107,25 +108,25 @@ const Posts = () => {
   //   setEditCategory(true);
   // };
 
-  const deleteCategoryHandler = (cat_id) => {
-    dispatch(fetchCategory(cat_id));
-    setDeleteCategoryData(true);
+  const deletePostHandler = (post_id) => {
+    dispatch(fetchPost(post_id));
+    setDeletePostData(true);
   };
 
-  const handleDelete = async (category) => {
+  const handleDelete = async (post) => {
     // console.log("coupon is here", coupon);
-    if (category) {
+    if (post) {
       // Handle delete category logic here
       try {
         // setLoading(true);
-        dispatch(deleteCategory(category?.id));
-        navigate("/admin/product/categories");
+        dispatch(deletePost(post?._id));
+        navigate("/admin/posts");
       } catch (error) {
         console.log(error);
 
         toast.error(error.response.data.message);
       } finally {
-        setDeleteCategoryData(false);
+        setDeletePostData(false);
       }
     }
   };
@@ -311,7 +312,7 @@ const Posts = () => {
                                 </div>
                                 <div
                                   className="cursor-pointer pl-2"
-                                  // onClick={() => deleteProductHandler(item?.id)}
+                                  onClick={() => deletePostHandler(item?._id)}
                                 >
                                   <DeleteIcon className="text-red-600 w-6 h-6 " />
                                 </div>
@@ -461,21 +462,21 @@ const Posts = () => {
             )}
           </div>
         )}
-      </div>
+      </div>*/}
 
-      {deleteCategoryData && (
+      {deletePostData && (
         <>
           <Notification
-            message="Are you sure you want to delete this category?"
+            message="Are you sure you want to delete this post?"
             type="warning"
-            onCancel={() => setDeleteCategoryData(false)}
+            onCancel={() => setDeletePostData(false)}
             onApprove={() => {
-              handleDelete(category?.data);
-              setDeleteCategoryData(false);
+              handleDelete(post?.response);
+              setDeletePostData(false);
             }}
           />
         </>
-      )} */}
+      )}
     </>
   );
 };
