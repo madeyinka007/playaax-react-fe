@@ -44,7 +44,11 @@ import {
 
 import DataTable from "../../components/Form/Table/DataTable";
 import ViewCategoryModal from "../../components/Modals/ViewCategoryModal";
-import { fetchAuthors } from "../../Redux/author/authorThunk";
+import {
+  deleteAuthor,
+  fetchAuthor,
+  fetchAuthors,
+} from "../../Redux/author/authorThunk";
 import AddAuthorModal from "../../components/Modals/AddAuthorModal";
 import EmptyState from "src/components/ui/EmptyState";
 import classNames from "classnames";
@@ -55,7 +59,7 @@ const Authors = () => {
 
   const [openCreateAuthor, setOpenCreateAuthor] = useState(false);
   const [viewCategory, setViewCategory] = useState(false);
-  const [deleteCategoryData, setDeleteCategoryData] = useState(false);
+  const [deleteAuthorData, setDeleteAuthorData] = useState(false);
 
   // const [posts, setPosts] = useState([]);
 
@@ -78,7 +82,7 @@ const Authors = () => {
   // console.log("aur=thor podt", authors);
 
   const fetchAuthorsHandler = () => {
-    dispatch(fetchAuthors("posts/author/pull?del_flag=0"));
+    dispatch(fetchAuthors());
   };
   useEffect(() => {
     fetchAuthorsHandler();
@@ -103,30 +107,30 @@ const Authors = () => {
   //   setEditCategory(true);
   // };
 
-  const deleteCategoryHandler = (cat_id) => {
-    dispatch(fetchCategory(cat_id));
-    setDeleteCategoryData(true);
+  const deleteAuthorHandler = (author_id) => {
+    dispatch(fetchAuthor(author_id));
+    setDeleteAuthorData(true);
   };
 
-  const handleDelete = async (category) => {
+  const handleDelete = async (author) => {
     // console.log("coupon is here", coupon);
-    if (category) {
-      // Handle delete category logic here
+    if (author) {
+      // Handle delete author logic here
       try {
         // setLoading(true);
-        dispatch(deleteCategory(category?.id));
-        navigate("/admin/product/categories");
+        dispatch(deleteAuthor(author?._id));
+        navigate("/admin/author");
       } catch (error) {
         console.log(error);
 
         toast.error(error.response.data.message);
       } finally {
-        setDeleteCategoryData(false);
+        setDeleteAuthorData(false);
       }
     }
   };
 
-  console.log("first category", authors?.length);
+  // console.log("first category", authors?.length);
 
   // const data = categories?.response;
 
@@ -265,7 +269,15 @@ const Authors = () => {
                                 {item?.image === null ? (
                                   "No  Image"
                                 ) : (
-                                  <p>{item?.image}</p>
+                                  // <p>{item?.image}</p>
+
+                                  <div className="w-14 h-14 rounded-md overflow-hidden bg-red-50">
+                                    <img
+                                      src={item?.image}
+                                      alt=""
+                                      className="w-full h-14 object-cover group-hover:scale-110 transition-all duration-300"
+                                    />
+                                  </div>
                                 )}
                               </td>
                               <td className="px-6 py-5 whitespace-nowrap">
@@ -302,7 +314,9 @@ const Authors = () => {
                                   </div>
                                   <div
                                     className="cursor-pointer pl-2"
-                                    // onClick={() => deleteProductHandler(item?.id)}
+                                    onClick={() =>
+                                      deleteAuthorHandler(item?._id)
+                                    }
                                   >
                                     <DeleteIcon className="text-red-600 w-6 h-6 " />
                                   </div>
@@ -449,21 +463,21 @@ const Authors = () => {
             )}
           </div>
         )}
-      </div>
+      </div>*/}
 
-      {deleteCategoryData && (
+      {deleteAuthorData && (
         <>
           <Notification
-            message="Are you sure you want to delete this category?"
+            message="Are you sure you want to delete this author?"
             type="warning"
-            onCancel={() => setDeleteCategoryData(false)}
+            onCancel={() => setDeleteAuthorData(false)}
             onApprove={() => {
-              handleDelete(category?.data);
-              setDeleteCategoryData(false);
+              handleDelete(author?.response);
+              setDeleteAuthorData(false);
             }}
           />
         </>
-      )} */}
+      )}
     </>
   );
 };
