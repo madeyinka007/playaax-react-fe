@@ -10,8 +10,8 @@ import { useNavigate } from "react-router-dom";
 
 import { categorySchema } from "src/schema/categorySchema";
 import CloseModal from "./CloseModal";
-import { Label } from "../Form/Label";
-import { PlusIcon } from "../../assets/SvgsIcons";
+// import { Label } from "../Form/Label";
+// import { PlusIcon } from "../../assets/SvgsIcons";
 
 import { useDispatch } from "react-redux";
 import {
@@ -28,12 +28,12 @@ const EditCategoryModal = ({ setOpenModal, catData, categories }) => {
 
   const getCategory = categories?.find((cat) => cat?._id === catData?._id);
 
-  console.log("catData?.parent?.label", catData);
+  // console.log("catData?.parent?.label", catData);
   // console.log("catData is", getCategory);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [files, setFiles] = useState(null);
 
-  console.log("selectedCategory", selectedCategory);
+  // console.log("selectedCategory", selectedCategory);
 
   const defaultFormValue = {
     description: catData?.description,
