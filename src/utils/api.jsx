@@ -9,7 +9,7 @@ const axiosInstance = axios.create({
   baseURL,
 });
 
-const Axios = axios.create({baseURL})
+// const Axios = axios.create({baseURL})
 
 // Add request interceptor to add token to headers
 axiosInstance.interceptors.request.use(
@@ -55,18 +55,18 @@ export const getData = async (url, params) => {
 // Utility function for POST requests
 export const postData = async (url, data) => {
   try {
-    const response = await fetch(baseURL+url, {
-      method:'POST',
+    const response = await fetch(baseURL + url, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body:JSON.stringify(data)
-    })
-    return response.json()
-  } catch(error) {
+      body: JSON.stringify(data),
+    });
+    return response.json();
+  } catch (error) {
     throw error;
   }
-}
+};
 // export const postData = async (url, data) => {
 //   try {
 //     const response = await axiosInstance.post(url, data);

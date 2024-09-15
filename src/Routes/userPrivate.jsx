@@ -13,7 +13,7 @@ const UserPrivate = () => {
   // debugger;
   // if (!currentauthUser) return navigate("/login");
 
-  console.log("Current user is ", currentauthUser);
+  // console.log("Current user is ", currentauthUser);
 
   const isAuthenticatedUser = currentauthUser?.role === "user";
 
