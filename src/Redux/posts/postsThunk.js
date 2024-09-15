@@ -1,9 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
-import { getData, postData, putData, removeData } from "../../utils/api";
+import { getData, postData } from "../../utils/api";
 // import { openToast } from "../Toast/toastSlice";
 
-const POST_URL = "admin/Post";
+// const POST_URL = "admin/Post";
 
 const fetchPosts = createAsyncThunk(
   "admin/fetchPost",
@@ -121,15 +121,9 @@ const deletePost = createAsyncThunk(
   async (id, { rejectWithValue, dispatch }) => {
     try {
       // console.log(id);
-      const response = await removeData(`${POST_URL}/${id}`);
-      if (
-        response?.status === 202 ||
-        response?.status === 200 ||
-        response?.status === 201 ||
-        response?.status_code === 202 ||
-        response?.status_code === 200 ||
-        response?.status_code === 201
-      ) {
+      const response = await getData(`posts/delete/${id}`);
+
+      if (response?.message === "Success") {
         dispatch(fetchPosts());
         toast.success("Post has been deleted successfully");
         // dispatch(
