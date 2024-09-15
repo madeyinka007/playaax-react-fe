@@ -36,7 +36,7 @@ const AddAuthorModal = ({ setOpenModal }) => {
       image: files,
     };
 
-    console.log("filtered data", filteredFormData);
+    // console.log("filtered data", filteredFormData);
     dispatch(addNewAuthor(filteredFormData));
     // alert(JSON.stringify(filteredFormData));
 
