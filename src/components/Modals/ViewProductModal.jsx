@@ -14,7 +14,7 @@ import { fetchCategorys } from "../../Redux/category/categoriesThunk";
 
 const ViewProductModal = ({ setOpenModal, productData, loading }) => {
   const dispatch = useDispatch();
-  console.log(" product data loaded", productData);
+  // console.log(" product data loaded", productData);
 
   const { categories } = useSelector((state) => state.category);
   // console.log(" aall categories", categories);
