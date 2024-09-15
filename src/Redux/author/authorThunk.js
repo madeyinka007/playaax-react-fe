@@ -8,9 +8,9 @@ const AUTHOR_URL = "admin/author";
 
 const fetchAuthors = createAsyncThunk(
   "admin/fetchAuthor",
-  async (url, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
-      const response = await getData(url);
+      const response = await getData("posts/author/pull?del_flag=0");
       return response;
     } catch (error) {
       const errorMessage = error;
@@ -45,7 +45,7 @@ const fetchAuthor = createAsyncThunk(
   "getAuthor",
   async (id, { rejectWithValue }) => {
     try {
-      const response = await getData(`posts/Author-by-identity?identity=${id}`);
+      const response = await getData(`posts/author-by-identity?identity=${id}`);
       return response;
     } catch (error) {
       const errorMessage = error;
@@ -94,15 +94,8 @@ const deleteAuthor = createAsyncThunk(
   async (id, { rejectWithValue, dispatch }) => {
     try {
       // console.log(id);
-      const response = await removeData(`${AUTHOR_URL}/${id}`);
-      if (
-        response?.status === 202 ||
-        response?.status === 200 ||
-        response?.status === 201 ||
-        response?.status_code === 202 ||
-        response?.status_code === 200 ||
-        response?.status_code === 201
-      ) {
+      const response = await getData(`posts/author/delete/${id}`);
+      if (response?.message === "Success") {
         dispatch(fetchAuthors());
         toast.success("Author deleted successfully!");
         // dispatch(
