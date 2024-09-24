@@ -449,15 +449,17 @@ const Home = () => {
                 <LoadingSpinner />
               ) : (
                 <article className="group">
-                  <img
-                    alt=""
-                    src={
-                      lastPost?.image
-                        ? lastPost?.image
-                        : "https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                    }
-                    className="h-64 lg:h-[400px] w-full rounded-xl object-cover shadow-xl transition "
-                  />
+                  <Link to={`/posts/${lastPost?._id}`}>
+                    <img
+                      alt=""
+                      src={
+                        lastPost?.image
+                          ? lastPost?.image
+                          : "https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                      }
+                      className="h-64 lg:h-[400px] w-full rounded-xl object-cover shadow-xl transition "
+                    />
+                  </Link>
 
                   <div className="p-4">
                     <Link to={`/posts/${lastPost?._id}`}>
