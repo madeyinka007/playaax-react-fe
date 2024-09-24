@@ -141,12 +141,12 @@ const Blogdetails = () => {
                       }}
                     />
                   </div> */}
-                  <div className="flex flex-col sm:flex-row justify-between">
-                    <div className="mt-4 sm:mt-0">
-                      <h1 className="text-18 text-gray-800 font-semibold">
+                  <div className="">
+                    <div className="flex flex-col sm:flex-row gap-4 items-center mt-8 pt-8 sm:mt-0">
+                      <h1 className="text-18  text-gray-800 font-semibold">
                         Share Post on:
                       </h1>
-                      <div className="mt-3 flex gap-2 flex-wrap">
+                      <div className=" flex gap-2 flex-wrap">
                         <FacebookShareButton
                           url={shareUrl}
                           quote={"playaax.com post"}
@@ -185,7 +185,7 @@ const Blogdetails = () => {
                         >
                           <TelegramIcon size={30} round={true} />
                         </TelegramShareButton>
-                        <a
+                        {/* <a
                           href=""
                           aria-label="facebook"
                           className="text-paragraph hover:text-purple transition-all duration-300"
@@ -260,7 +260,7 @@ const Blogdetails = () => {
                               fill="currentColor"
                             />
                           </svg>
-                        </a>
+                        </a> */}
                       </div>
                     </div>
                   </div>
