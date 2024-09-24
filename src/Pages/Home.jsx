@@ -170,11 +170,11 @@ const Home = () => {
                 </div>
 
                 <div className="px-4">
-                  <CategoryItem categories={categories} />
+                  <CategoryItem categories />
                 </div>
               </article>
             </div>
-            <article className="rounded-xl border border-gray-100 bg-white p-4 shadow-sm transition hover:shadow-lg sm:p-6">
+            {/* <article className="rounded-xl border border-gray-100 bg-white p-4 shadow-sm transition hover:shadow-lg sm:p-6">
               <a href="#">
                 <h3 className="mt-0.5 text-lg font-semibold uppercase text-gray-800">
                   predict & win
@@ -342,7 +342,7 @@ const Home = () => {
                   </Button>
                 </div>
               </HookForm>
-            </article>
+            </article> */}
             <div className="p-5">
               <img src={adbanner2} alt=" banner ads" />
             </div>
@@ -621,7 +621,7 @@ const Home = () => {
               </article>
             </div>
 
-            <article className="rounded-xl border border-gray-100 bg-white p-4 shadow-sm transition hover:shadow-lg sm:p-6">
+            {/* <article className="rounded-xl border border-gray-100 bg-white p-4 shadow-sm transition hover:shadow-lg sm:p-6">
               <a href="#">
                 <h3 className="mt-0.5 text-lg font-semibold uppercase text-gray-800">
                   Click and win
@@ -657,7 +657,7 @@ const Home = () => {
                   Click To Win{" "}
                 </Button>
               </HookForm>
-            </article>
+            </article> */}
 
             <div className="p-5">
               <img src={adbanner} alt=" banner ads" />

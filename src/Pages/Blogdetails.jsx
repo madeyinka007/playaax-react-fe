@@ -7,7 +7,7 @@ import { Link, useParams } from "react-router-dom";
 import { fetchPost, fetchPosts } from "src/Redux/posts/postsThunk";
 import LoadingSpinner from "src/components/Loading/LoadingSpinner";
 import ErrorStatus from "src/components/ui/ErrorStatus";
-// import { DiscussionEmbed } from "disqus-react";
+import { DiscussionEmbed } from "disqus-react";
 import { formatDateOnly } from "src/utils/constant";
 import addside from "../assets/images/ads-sidebar.png";
 import CategoryItem from "src/components/ui/CategoryItem";
@@ -105,17 +105,17 @@ const Blogdetails = () => {
                       language: "zh_TW", //e.g. for Traditional Chinese (Taiwan)
                     }}
                   /> */}
-                  {/* <div className="my-10">
+                  <div className="my-10">
                     <DiscussionEmbed
                       shortname="playaax-com"
                       config={{
-                        url: `/posts/${postData?._id},`,
+                        url: `https://playaax.com/posts/${postData?._id},`,
                         identifier: postData?._id,
                         title: postData?.title,
                         // language: "zh_TW", //e.g. for Traditional Chinese (Taiwan)
                       }}
                     />
-                  </div> */}
+                  </div>
                   <div className="flex flex-col sm:flex-row justify-between">
                     <div className="mt-4 sm:mt-0">
                       <h1 className="text-18 text-gray-800 font-semibold">
