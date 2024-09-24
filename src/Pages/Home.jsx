@@ -149,6 +149,12 @@ const Home = () => {
     // navigate("/product/inventory/");
     // setOpenModal(false);
   };
+  const getPremierLeague = categories?.find(
+    (c) => c.label === "Premier League"
+  );
+
+  // console.log("first page", getPremierLeague);
+
   return (
     <>
       {/* <Header />
@@ -415,22 +421,28 @@ const Home = () => {
             <div className="bg-white space-y-5 rounded-xl p-5 ">
               <div className=" flex items-center justify-between ">
                 <div className="flex items-center gap-2 text-lg font-medium uppercase py-0  text-gray-800">
-                  <img src={Premier} alt="icon " className="w-9 h-9" />
-                  <p>ENGLISH PREMIER LEAGUE</p>
+                  <img
+                    src={getPremierLeague?.icon || Premier}
+                    alt="icon "
+                    className="w-9 h-9"
+                  />
+                  <p> {getPremierLeague?.label || "ENGLISH PREMIER LEAGUE"}</p>
                 </div>
                 <div>
-                  <a
-                    href="#"
-                    className="group  inline-flex items-center gap-1 text-sm font-medium text-primary-800 pr-2"
+                  <Link
+                    to={`/category/${getPremierLeague?.slug}`}
+                    className=" block"
                   >
-                    Read more
-                    <span
-                      aria-hidden="true"
-                      className="block transition-all group-hover:ms-0.5 rtl:rotate-180"
-                    >
-                      &rarr;
+                    <span className="group  inline-flex items-center gap-1 text-sm font-medium text-primary-800 pr-2">
+                      Read more
+                      <span
+                        aria-hidden="true"
+                        className="block transition-all group-hover:ms-0.5 rtl:rotate-180"
+                      >
+                        &rarr;
+                      </span>
                     </span>
-                  </a>
+                  </Link>
                 </div>
               </div>
               {loading ? (
@@ -444,7 +456,7 @@ const Home = () => {
                         ? lastPost?.image
                         : "https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
                     }
-                    className="h-64 lg:h-[500px] w-full rounded-xl object-cover shadow-xl transition "
+                    className="h-64 lg:h-[400px] w-full rounded-xl object-cover shadow-xl transition "
                   />
 
                   <div className="p-4">
@@ -491,15 +503,17 @@ const Home = () => {
                       ?.slice(0, loadMore)
                       ?.map((mainPost, mainPostIndex) => (
                         <article key={mainPostIndex} className="group">
-                          <img
-                            alt=""
-                            src={
-                              mainPost?.image
-                                ? mainPost?.image
-                                : "https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                            }
-                            className="h-64 lg:h-[500px] w-full rounded-xl object-cover shadow-xl transition "
-                          />
+                          <Link to={`/posts/${mainPost?._id}`}>
+                            <img
+                              alt="post img"
+                              src={
+                                mainPost?.image
+                                  ? mainPost?.image
+                                  : "https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                              }
+                              className="h-64 lg:h-[400px] w-full rounded-xl object-cover shadow-xl transition "
+                            />
+                          </Link>
 
                           <div className="p-4">
                             <Link to={`/posts/${mainPost?._id}`}>
