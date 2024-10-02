@@ -74,7 +74,7 @@ const HeroSlider = ({ sliderdata }) => {
           <div className="tp-slider-area relative">
             <div className="swiper-container slider-active">
               <Swiper {...swiperOptions}>
-                {sliderPosts.map((item, index) => (
+                {sliderPosts.slice(-6, -1).map((item, index) => (
                   <SwiperSlide key={index}>
                     <div className="tp-slide-item relative rounded">
                       <div className=" max-w-xs z-30 md:max-w-sm lg:max-w-md  absolute left-4 bottom-10 md:left-8 md:bottom-16 lg:left-10 xl:left-12 lg:bottom-20  ">
