@@ -6,10 +6,12 @@ import Loading from "../components/Loading/Loading";
 import Header from "../components/Header";
 import Footer from "../components/layout/Footer";
 import Headlines from "../components/Headlines";
+import Header04 from "../components/Header04";
 
 const Public = () => {
   return (
     <div>
+      {/* <Header04 /> */}
       <Header />
       <div className="pt-[76px]">
         <Headlines />
