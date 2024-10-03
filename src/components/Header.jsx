@@ -67,9 +67,9 @@ export const Header = () => {
                   {menu.map(({ url, title }, index) => (
                     <NavLink key={index} url={url} title={title} />
                   ))}
-                  <Link to="/contact">
+                  {/* <Link to="/contact">
                     <Button>contactk</Button>
-                  </Link>
+                  </Link> */}
                 </ul>
               </nav>
               {/* Actions */}

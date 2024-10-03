@@ -97,7 +97,6 @@ const CategoryBlock = () => {
     "Germany ",
     "Basketball",
     "Italian Serial A",
-    "Game Consoles",
     "Table Tennis",
     "French",
     "transfer News",
@@ -185,7 +184,7 @@ const CategoryBlock = () => {
                 </div>
               </article>
             </div>
-            <article className="rounded-xl border border-gray-100 bg-white p-4 shadow-sm transition hover:shadow-lg sm:p-6">
+            {/* <article className="rounded-xl border border-gray-100 bg-white p-4 shadow-sm transition hover:shadow-lg sm:p-6">
               <a href="#">
                 <h3 className="mt-0.5 text-lg font-semibold uppercase text-gray-800">
                   predict & win
@@ -353,7 +352,7 @@ const CategoryBlock = () => {
                   </Button>
                 </div>
               </HookForm>
-            </article>
+            </article> */}
             <div className="p-5">
               <img src={adbanner2} alt=" banner ads" />
             </div>
@@ -576,7 +575,7 @@ const CategoryBlock = () => {
               </article>
             </div>
 
-            <article className="rounded-xl border border-gray-100 bg-white p-4 shadow-sm transition hover:shadow-lg sm:p-6">
+            {/* <article className="rounded-xl border border-gray-100 bg-white p-4 shadow-sm transition hover:shadow-lg sm:p-6">
               <a href="#">
                 <h3 className="mt-0.5 text-lg font-semibold uppercase text-gray-800">
                   Click and win
@@ -612,7 +611,7 @@ const CategoryBlock = () => {
                   Click To Win{" "}
                 </Button>
               </HookForm>
-            </article>
+            </article> */}
 
             <div className="p-5">
               <img src={adbanner} alt=" banner ads" />

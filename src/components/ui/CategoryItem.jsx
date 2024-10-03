@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const CategoryItem = ({ categories }) => {
+const categories = []
+
+const CategoryItem = () => {
   return (
     <div className=" space-y-2.5 py-5">
       {categories?.map((catItem, categoryIndex) => (

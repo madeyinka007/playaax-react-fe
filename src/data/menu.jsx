@@ -1,25 +1,29 @@
 const menu = [
-  { title: "Home", url: "/" },
-  { title: "Football", url: "/" },
+  // { title: "Home", url: "/" },
+  { title: "Football", url: "category/football" },
   {
-    title: "NBA",
-    url: "/",
+    title: "Basketball",
+    url: "category/basketball",
   },
   {
-    title: "NFL",
-    url: "/",
+    title: "UFC",
+    url: "category/ufc",
   },
   {
     title: "Boxing",
-    url: "/",
+    url: "category/boxing",
   },
   {
-    title: "Cricket",
-    url: "/",
+    title: "WWE",
+    url: "category/wwe",
   },
   {
-    title: "Basketball",
-    url: "/",
+    title: "Academy",
+    url: "category/academy",
+  },
+  {
+    title: "More",
+    url: "category/more",
   },
 ];
 
