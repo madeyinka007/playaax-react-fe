@@ -3,7 +3,7 @@
 // import Header from "src/components/Header";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { fetchPost, fetchPosts } from "src/Redux/posts/postsThunk";
 import LoadingSpinner from "src/components/Loading/LoadingSpinner";
 import ErrorStatus from "src/components/ui/ErrorStatus";
@@ -12,6 +12,18 @@ import { formatDateOnly } from "src/utils/constant";
 import addside from "../assets/images/ads-sidebar.png";
 import CategoryItem from "src/components/ui/CategoryItem";
 import { fetchCategorys } from "src/Redux/category/categoriesThunk";
+import {
+  FacebookShareButton,
+  WhatsappShareButton,
+  TwitterShareButton,
+  LinkedinShareButton,
+  TelegramShareButton,
+  WhatsappIcon,
+  FacebookIcon,
+  TwitterIcon,
+  LinkedinIcon,
+  TelegramIcon,
+} from "react-share";
 
 const tagsData = [
   "Hockey",
@@ -56,6 +68,19 @@ const Blogdetails = () => {
     fetchCategorysHandler();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
+
+  // const baseUrl = window.location.origin;
+
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  // console.log("test base", baseUrl);
+  // console.log("first path: ", currentPath);
+
+  const shareUrl = `https://playaax.com${currentPath}`;
+
+  // console.log("test base", shareUrl);
+
   return (
     <div>
       {/* <Header />
@@ -115,14 +140,60 @@ const Blogdetails = () => {
                         // language: "zh_TW", //e.g. for Traditional Chinese (Taiwan)
                       }}
                     />
+<<<<<<< HEAD
                   </div>
                   <div className="flex flex-col sm:flex-row justify-between">
                     <div className="mt-4 sm:mt-0">
                       <h1 className="text-18 text-gray-800 font-semibold">
                         Share projects
+=======
+                  </div> */}
+                  <div className="">
+                    <div className="flex flex-col sm:flex-row gap-4 items-center mt-8 pt-8 sm:mt-0">
+                      <h1 className="text-18  text-gray-800 font-semibold">
+                        Share Post on:
+>>>>>>> main
                       </h1>
-                      <div className="mt-3 flex gap-6 flex-wrap">
-                        <a
+                      <div className=" flex gap-2 flex-wrap">
+                        <FacebookShareButton
+                          url={shareUrl}
+                          quote={"playaax.com post"}
+                          hashtag={"#playaaxpost..."}
+                        >
+                          <FacebookIcon size={30} round={true} />
+                        </FacebookShareButton>
+
+                        <WhatsappShareButton
+                          url={shareUrl}
+                          quote={"playaax.com post"}
+                          hashtag={"#playaaxpost..."}
+                        >
+                          <WhatsappIcon size={30} round={true} />
+                        </WhatsappShareButton>
+
+                        <TwitterShareButton
+                          url={shareUrl}
+                          quote={"playaax.com post"}
+                          hashtag={"#playaaxpost..."}
+                        >
+                          <TwitterIcon size={30} round={true} />
+                        </TwitterShareButton>
+
+                        <LinkedinShareButton
+                          url={shareUrl}
+                          quote={"playaax.com post"}
+                          hashtag={"#playaaxpost..."}
+                        >
+                          <LinkedinIcon size={30} round={true} />
+                        </LinkedinShareButton>
+                        <TelegramShareButton
+                          url={shareUrl}
+                          quote={"playaax.com post"}
+                          hashtag={"#playaaxpost..."}
+                        >
+                          <TelegramIcon size={30} round={true} />
+                        </TelegramShareButton>
+                        {/* <a
                           href=""
                           aria-label="facebook"
                           className="text-paragraph hover:text-purple transition-all duration-300"
@@ -197,7 +268,7 @@ const Blogdetails = () => {
                               fill="currentColor"
                             />
                           </svg>
-                        </a>
+                        </a> */}
                       </div>
                     </div>
                   </div>

@@ -110,7 +110,7 @@ const NavBar = ({ toggleSideBar, openSideMenu }) => {
               <img
                 className="w-12 h-12 rounded-full"
                 src={UserAvatar}
-                alt="user photo"
+                alt="user profile "
               />
             </button>
           </div>

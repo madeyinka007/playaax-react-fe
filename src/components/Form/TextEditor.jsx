@@ -22,7 +22,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-const MenuBar = ({ htmlContent, setHtmlContent }) => {
+const MenuBar = ({ setHtmlContent }) => {
   const { editor } = useCurrentEditor();
   // const [htmlContent, setHtmlContent] = useState("");
 
@@ -50,6 +50,7 @@ const MenuBar = ({ htmlContent, setHtmlContent }) => {
         setHtmlContent(editor.getHTML());
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editor]);
 
   return (
