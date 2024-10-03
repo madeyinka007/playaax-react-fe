@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 // Define base URL
 //const baseURL = 'http://localhost:3000/api/'
-const baseURL = "/api/";
+const baseURL = "https://bi08fsi8i7.execute-api.us-east-1.amazonaws.com/api/";
 // Create an Axios instance with default configurations
 const axiosInstance = axios.create({
   baseURL,

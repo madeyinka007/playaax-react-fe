@@ -18,12 +18,12 @@ const menu = [
     url: "category/wwe",
   },
   {
-    title: "Sports",
-    url: "category/sports",
-  },
-  {
     title: "Academy",
     url: "category/academy",
+  },
+  {
+    title: "More",
+    url: "category/more",
   },
 ];
 
